@@ -2,8 +2,10 @@ Map map;
 String[][] mapData;
 ArrayList<IInputListener> listeners;
 ArrayList<IDrawable> drawables;
+GameState state;
 
 void setup(){
+  state = GameState.MainMenu;
   size(800,600);
   listeners = new ArrayList<IInputListener>();
   drawables = new ArrayList<IDrawable>();
@@ -11,10 +13,10 @@ void setup(){
   TileFactory.RegisterTile("empty", new Tile("empty_tile.png", false));
   map = new Map(32);
   mapData = new String[][]{
-  {"default", "empty", "default"},
-  {"default", "default", "default"},
-  {"default", "empty", "default"}
-};
+    {"default", "empty", "default"},
+    {"default", "default", "default"},
+    {"default", "empty", "default"}
+  };
   map.Load(mapData);
   drawables.add(map);
 }
