@@ -12,7 +12,11 @@ abstract class Tile implements Cloneable {
     this.collidable = collidable;
   }
   
-  public void DisplayAt(int x, int y){
+  public void DisplayAt(int x, int y, int buffer){
+      if(img == null){
+        rect(x,y,buffer,buffer);
+        return;
+      }
       image(img, x, y);
   }
   

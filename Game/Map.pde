@@ -20,7 +20,7 @@ class Map implements IDrawable {
   public void Display(){
     for(int row = 0; row < grid.length; row++){
       for(int col = 0; col < grid[row].length; col++){
-        grid[row][col].DisplayAt(col * tileBuffer, row * tileBuffer);
+        grid[row][col].DisplayAt(col * tileBuffer, row * tileBuffer,tileBuffer);
       }
     }
   } 
