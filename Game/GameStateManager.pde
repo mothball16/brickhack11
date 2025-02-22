@@ -1,22 +1,10 @@
 class gameStateManager {
-
-  void update(GameState state) {
-    while (state != GameState.GameOver) {
-      switch (state) {
-        case MainMenu:
-          // MainMenu Logic
-          break;
-        case Playing:
-          // Game logic
-          break;
-        case Paused:
-          // Pause logic
-          break;
-      }
-    }
-  }
-
+int timer = 100; // initialize with how long game lasts (temp val = 100
   void display(GameState state) {
+    timer++;
+    if (timer == 0) {
+      state = GameState.GameOver;
+    }
     switch (state) {
     case MainMenu:
       //fill, textalign, textsize, text
