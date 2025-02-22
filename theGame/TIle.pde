@@ -1,0 +1,16 @@
+class Tile {  
+  
+  
+  
+  PImage img;
+  boolean 
+  
+  
+  Tile(PImage img){
+  
+  }
+  
+  void display(){
+      
+  }
+}
