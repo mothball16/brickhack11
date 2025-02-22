@@ -1,11 +1,15 @@
 //container for an image w/ methods/properties related to tile n stuff
 //map handles the drawing of tiles, so IDrawable not implemented
-abstract class Tile {  
+
+
+
+abstract class Tile implements Cloneable {  
   PImage img;
   boolean collidable;
   
-  Tile(String img){
+  Tile(String img, boolean collidable){
     this.img = loadImage(img);
+    this.collidable = collidable;
   }
   
   public void DisplayAt(int x, int y){
@@ -22,4 +26,9 @@ abstract class Tile {
   
   public abstract void WhileEntered();
   
+  @Override
+  public Tile clone()
+  throws CloneNotSupportedException {
+      return (Tile) super.clone();
+  } 
 }
