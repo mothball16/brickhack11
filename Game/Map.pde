@@ -1,9 +1,10 @@
-class Map implements IDrawable, Comparable {
+class Map extends GameElement {
   private final Tile[][] grid; 
   private int tileBuffer;
   
   public Map(int tileBuffer, String[][] mapData){
-   this.tileBuffer = tileBuffer;
+    super(1);
+    this.tileBuffer = tileBuffer;
     grid = new Tile[mapData.length][mapData[0].length];
     for(int row = 0; row < mapData.length; row++){
       for(int col = 0; col < mapData[row].length; col++){
@@ -17,8 +18,7 @@ class Map implements IDrawable, Comparable {
     return grid;
   }
   
-  public int GetPriority(){ return 1; }
-  
+  @Override
   public void Display(){
     for(int row = 0; row < grid.length; row++){
       for(int col = 0; col < grid[row].length; col++){
@@ -36,6 +36,7 @@ class Map implements IDrawable, Comparable {
     return grid.length; 
   }
   
+  @Override
   public int compareTo(Object that){
     return this.GetPriority() - ((IDrawable) that).GetPriority();
   }
