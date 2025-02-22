@@ -9,14 +9,22 @@ void setup(){
   size(800,600);
   listeners = new ArrayList<IInputListener>();
   drawables = new ArrayList<IDrawable>();
-  TileFactory.RegisterTile("default", new Tile(false));
-  TileFactory.RegisterTile("empty", new Tile("empty_tile.png", false));
-  map = new Map(32,mapData);
+  TileFactory.RegisterTile("d", new Tile(true));
+  TileFactory.RegisterTile("e", new Tile("empty_tile.png", false));
   mapData = new String[][]{
-  {"default", "empty", "default"},
-  {"default", "default", "default"},
-  {"default", "empty", "default"}
-  };
+  {"e", "d", "d","d", "d", "d","d", "d", "e",},
+  {"e", "e", "e","e", "e", "e","e", "e", "e",},
+  {"e", "d", "e","d", "e", "d","d", "e", "e",},
+  {"e", "e", "e","e", "e", "e","e", "e", "e",},
+  {"d", "e", "d","d", "e", "d","e", "d", "e",},
+  {"d", "e", "e","e", "e", "d","e", "e", "e",},
+  {"d", "e", "e","e", "e", "d","e", "e", "e",},
+  {"d", "e", "d","d", "e", "d","e", "d", "e",},
+  {"e", "e", "e","e", "e", "e","e", "e", "e",},
+  {"e", "d", "e","d", "e", "d","d", "e", "e",},
+  {"e", "e", "e","e", "e", "e","e", "e", "e",},
+};
+  map = new Map(32,mapData);
   drawables.add(map);
 }
 
