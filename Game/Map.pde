@@ -27,6 +27,12 @@ class Map extends GameElement {
     }
   } 
   
+  //get the center of the tile at row, col
+  public Coordinates GetTilePos(int row, int col){
+    return new Coordinates(
+    (int) ((row + 0.5) * tileBuffer), 
+    (int) ((col + 0.5) * tileBuffer));
+  }
   
   public int GetWidth(){
     return grid[0].length; 
