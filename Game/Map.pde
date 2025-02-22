@@ -1,4 +1,4 @@
-class Map implements IDrawable {
+class Map implements IDrawable, Comparable {
   private final Tile[][] grid; 
   private int tileBuffer;
   
@@ -26,4 +26,8 @@ class Map implements IDrawable {
       }
     }
   } 
+  
+  public int compareTo(Object that){
+    return this.GetPriority() - ((IDrawable) that).GetPriority();
+  }
 }
