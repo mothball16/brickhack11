@@ -1,22 +1,23 @@
 class Map implements IDrawable {
-  Tile[][] grid; 
-  int tileBuffer;
+  private final Tile[][] grid; 
+  private int tileBuffer;
   
-  Map(int tileBuffer){
-    this.tileBuffer = tileBuffer;
-  }
-  
-  public void Load(String[][] mapData){
+  public Map(int tileBuffer, String[][] mapData){
+   this.tileBuffer = tileBuffer;
     grid = new Tile[mapData.length][mapData[0].length];
     for(int row = 0; row < mapData.length; row++){
       for(int col = 0; col < mapData[row].length; col++){
-        
         grid[row][col] = TileFactory.Create(mapData[row][col]);
       }
-    }
+    }  
   }
   
   
+  public Tile[][] getGrid(){
+    return grid;
+  }
+  
+  public int GetPriority(){ return 1; }
   
   public void Display(){
     for(int row = 0; row < grid.length; row++){
