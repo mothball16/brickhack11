@@ -9,7 +9,7 @@ class Tile {
     this.img = img;
   }
   
-  void display(){
+  void displayAt(int x, int y){
       
   }
 }
