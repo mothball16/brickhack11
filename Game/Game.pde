@@ -1,13 +1,16 @@
+
 Map map;
 String[][] mapData;
-ArrayList<IInputListener> listeners;
+ArrayList<IInputListener> inputListeners;
+ArrayList<IMouseListener> mouseListeners;
 ArrayList<IDrawable> drawables;
 GameState state;
 
 void setup(){
   state = GameState.MainMenu;
   size(800,600);
-  listeners = new ArrayList<IInputListener>();
+  inputListeners = new ArrayList<IInputListener>();
+  mouseListeners = new ArrayList<IMouseListener>();
   drawables = new ArrayList<IDrawable>();
   TileFactory.RegisterTile("d", new Tile(true));
   TileFactory.RegisterTile("e", new Tile("empty_tile.png", false));
@@ -34,21 +37,35 @@ void setup(){
 
 void draw(){
   background(200);
-  
+
   for(IDrawable drawable : drawables){
     drawable.Display();
   }
 }
 
 void keyPressed(){
-  for(IInputListener listener : listeners){
+  for(IInputListener listener : inputListeners){
     listener.OnKeyPressed(key); 
   }
   
 }
 
 void keyReleased(){
-  for(IInputListener listener : listeners){
+  for(IInputListener listener : inputListeners){
     listener.OnKeyReleased(key); 
   }
+}
+
+void mousePressed(){
+  for(IMouseListener listener : mouseListeners){
+    listener.OnMousePressed(); 
+  }
+}
+
+
+void mouseReleased(){
+  for(IMouseListener listener : mouseListeners){
+    listener.OnMouseReleased();
+  }
+  
 }
