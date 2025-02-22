@@ -1,4 +1,5 @@
+
 interface IDrawable {
- void display();
+  public void Display();
 }
   

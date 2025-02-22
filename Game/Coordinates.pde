@@ -1,3 +1,4 @@
+/*
 class Coordinates{
   private int x;
   private int y;
@@ -29,5 +30,4 @@ class Coordinates{
   int hashCode(){
     return (x*1000) + (y);
   }
-}
-  
+}*/
