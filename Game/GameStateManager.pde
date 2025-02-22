@@ -1,7 +1,8 @@
 class gameStateManager {
-int timer = 100; // initialize with how long game lasts (temp val = 100
+  int timer = 100; // initialize with how long game lasts (temp val = 100
+  int points = 0;
   void display(GameState state) {
-    timer++;
+    timer--;
     if (timer == 0) {
       state = GameState.GameOver;
     }
