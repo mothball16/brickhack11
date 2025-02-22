@@ -14,6 +14,7 @@ class Guard extends GameElement{
     coords = new Coordinates(row, col);
   }
   
+  @Override
   public void Display(){
     
   }
