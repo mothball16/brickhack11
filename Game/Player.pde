@@ -2,11 +2,16 @@
 
 
 
-public class Player implements IInputListener {
+public class Player extends GameElement implements IInputListener {
   
   boolean up,down,left,right;
   
   public Player(){
+    super(3);
+  }
+  
+  @Override
+  public void Display(){
     
   }
   

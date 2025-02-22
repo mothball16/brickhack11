@@ -2,15 +2,20 @@ import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-class Guard{
+class Guard extends GameElement{
   Tile grid[][];
   HashMap<Coordinates, Coordinates> path = null;
   Coordinates coords;
   Coordinates goalCoords;
   
   public Guard(Tile board[][], int row, int col){
+    super(3);
     grid = board;
     coords = new Coordinates(row, col);
+  }
+  
+  public void Display(){
+    
   }
   
   boolean setGoal(int row, int col){
