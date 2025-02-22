@@ -9,20 +9,19 @@ void setup(){
   drawables = new ArrayList<IDrawable>();
   TileFactory.RegisterTile("default", new Tile(false));
   TileFactory.RegisterTile("empty", new Tile("empty_tile.png", false));
-  map = new Map(32);
+  map = new Map(32,mapData);
   mapData = new String[][]{
   {"default", "empty", "default"},
   {"default", "default", "default"},
   {"default", "empty", "default"}
-};
-  map.Load(mapData);
-  drawables.add(map);
+  };
+  
 }
 
 
 void draw(){
   background(200);
-
+  
   for(IDrawable drawable : drawables){
     drawable.Display();
   }
