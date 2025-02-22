@@ -1,13 +1,12 @@
+//tile should not know of its position because that is managed by map
+
 class Tile {  
-  
-  
-  
   PImage img;
-  boolean 
+  boolean collidable;
   
   
   Tile(PImage img){
-  
+    this.img = img;
   }
   
   void display(){
