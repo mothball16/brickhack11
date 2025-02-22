@@ -32,8 +32,6 @@ class Guard{
     }
   }
   
-  
-  
   boolean validCoords(int row, int col){
     if(grid != null && row < grid.length && row >= 0 
     && col >= 0 && col < grid[0].length
@@ -115,3 +113,4 @@ class Guard{
   }
   
 }
+  
