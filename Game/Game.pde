@@ -1,10 +1,12 @@
 Map map;
 String[][] mapData;
 ArrayList<IInputListener> listeners;
-ArrayList<IDrawable> drawable;
+ArrayList<IDrawable> drawables;
 
 void setup(){
   size(800,600);
+  listeners = new ArrayList<IInputListener>();
+  drawables = new ArrayList<IDrawable>();
   TileFactory.RegisterTile("default", new Tile(false));
   TileFactory.RegisterTile("empty", new Tile("empty_tile.png", false));
   map = new Map(32);
@@ -14,13 +16,16 @@ void setup(){
   {"default", "empty", "default"}
 };
   map.Load(mapData);
+  drawables.add(map);
 }
 
 
 void draw(){
   background(200);
-  map.Display();
-  
+
+  for(IDrawable drawable : drawables){
+    drawable.Display();
+  }
 }
 
 void keyPressed(){
