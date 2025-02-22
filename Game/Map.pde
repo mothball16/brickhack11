@@ -10,6 +10,7 @@ class Map implements IDrawable {
     grid = new Tile[mapData.length][mapData[0].length];
     for(int row = 0; row < mapData.length; row++){
       for(int col = 0; col < mapData[row].length; col++){
+        
         grid[row][col] = TileFactory.Create(mapData[row][col]);
       }
     }

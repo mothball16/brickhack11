@@ -3,11 +3,15 @@
 
 
 
-abstract class Tile implements Cloneable {  
+public class Tile implements Cloneable {  
   PImage img;
   boolean collidable;
   
-  Tile(String img, boolean collidable){
+  public Tile(boolean collidable){
+    this.collidable = collidable;
+  }
+  
+  public Tile(String img, boolean collidable){
     this.img = loadImage(img);
     this.collidable = collidable;
   }
@@ -24,11 +28,11 @@ abstract class Tile implements Cloneable {
     return collidable;
   }
   
-  public abstract void OnEnter();
+  public void OnEnter() {}
   
-  public abstract void OnLeave();
+  public void OnLeave() {}
   
-  public abstract void WhileEntered();
+  public void WhileEntered() {}
   
   @Override
   public Tile clone()

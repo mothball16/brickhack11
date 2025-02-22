@@ -1,4 +1,4 @@
-
+/*
 class Coordinates{
   private int x;
   private int y;
@@ -31,3 +31,4 @@ class Coordinates{
     return (x*1000) + (y);
   }
 }
+*/
