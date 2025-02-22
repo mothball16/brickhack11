@@ -2,8 +2,10 @@ Map map;
 String[][] mapData;
 ArrayList<IInputListener> listeners;
 ArrayList<IDrawable> drawables;
+GameState state;
 
 void setup(){
+  state = GameState.MainMenu;
   size(800,600);
   listeners = new ArrayList<IInputListener>();
   drawables = new ArrayList<IDrawable>();
@@ -15,7 +17,7 @@ void setup(){
   {"default", "default", "default"},
   {"default", "empty", "default"}
   };
-  
+  drawables.add(map);
 }
 
 
