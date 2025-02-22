@@ -26,6 +26,9 @@ void setup(){
 };
   map = new Map(32,mapData);
   drawables.add(map);
+  Guard guard = new Guard(map.getGrid(), 0, 0);
+  guard.setGoal(mapData.length-1, mapData[0].length-1);
+  System.out.print(guard.toString());
 }
 
 

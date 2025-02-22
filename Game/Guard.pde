@@ -3,12 +3,12 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 class Guard{
-  int grid[][];
+  Tile grid[][];
   HashMap<Coordinates, Coordinates> path = null;
   Coordinates coords;
   Coordinates goalCoords;
   
-  public Guard(int board[][], int row, int col){
+  public Guard(Tile board[][], int row, int col){
     grid = board;
     coords = new Coordinates(row, col);
   }
@@ -37,7 +37,7 @@ class Guard{
   boolean validCoords(int row, int col){
     if(grid != null && row < grid.length && row >= 0 
     && col >= 0 && col < grid[0].length
-    && grid[row][col] == 0){
+    && !grid[row][col].GetCollidable()){
       return true;
     } else {
       return false;
