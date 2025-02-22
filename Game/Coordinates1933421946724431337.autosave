@@ -30,3 +30,4 @@ class Coordinates{
     return (x*1000) + (y);
   }
 }
+  
