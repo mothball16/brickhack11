@@ -27,6 +27,15 @@ class Map implements IDrawable, Comparable {
     }
   } 
   
+  
+  public int GetWidth(){
+    return grid[0].length; 
+  }
+  
+  public int GetHeight(){
+    return grid.length; 
+  }
+  
   public int compareTo(Object that){
     return this.GetPriority() - ((IDrawable) that).GetPriority();
   }
