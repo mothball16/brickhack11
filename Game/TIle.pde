@@ -9,20 +9,10 @@ public class Tile implements Cloneable {
   
   
   
-
-  public Tile(boolean collidable){
-    this(collidable,false);
-  }
-  public Tile(boolean collidable, boolean opaque){
+  public Tile(String img, boolean collidable, boolean opaque){
     this.collidable = collidable;
     this.opaque = opaque;
-  }
-  public Tile(String img, boolean collidable){
-    this(img,collidable,false);
-  }
-  public Tile(String img, boolean collidable, boolean opaque){
-    this(collidable, opaque);
-    this.img = loadImage(img);
+    if(img != null) this.img = loadImage(img);
   }
 
   

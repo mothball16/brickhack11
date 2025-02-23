@@ -1,53 +1,108 @@
-class GameStateManager implements IInputListener, IMouseListener {
+class DrawManager {
   boolean pauseRequested;
-  int timer = 100; // initialize with how long game lasts (temp val = 100
-  int points = 0;
-  void display(GameState state) {
-    timer--;
-    if (timer == 0) {
-      state = GameState.GameOver;
-    }
-    switch (state) {
-    case MainMenu:
-      //fill, textalign, textsize, text
+  HashMap<String,Button> buttons;
+  ArrayList<IMouseListener> listeners;
+  GameState prevState;
+  public DrawManager(ArrayList<IMouseListener> listeners, GameState currentState){
+    this.listeners = listeners;
+    buttons = new HashMap<>();
+    EnterState(currentState);
+  }
+  
+  public void HandleDrawables(ArrayList<IDrawable> drawables){
+     for(IDrawable drawable : drawables){
+      drawable.Display();
+    } 
+  }
+  
+  public void DrawToScreen(ArrayList<IDrawable> drawables, GameState state){
+    switch(state){
+      case MainMenu:
+        background(50);
+        HandleDrawables(drawables);
+        break;
+
       
-      break;
-    case Playing:
-      //fill, textalign, textsize, text
-      if(pauseRequested){
-        state = GameState.Paused;
-      }  
+      case Playing:
+        background(100);
+        HandleDrawables(drawables);
+        break;
         
-      break;
-    case Paused:
-      //fill, textalign, textsize, text
-      break;
-    case GameOver:
-      //fill, textalign, textsize, text
-      break;
-    }
-  }
-  
-  public void OnKeyPressed(char input){
-    switch(Character.toLowerCase(input)){
-      case 'p':
-        pauseRequested = true;
+      case Paused:
+        background(50);
+        HandleDrawables(drawables);
+        
+        textAlign(CENTER,CENTER);
+        textSize(50);
+        text("PAUSED",width/2,height/2);
+
         break;
+      
+      
     }
-  }
-  
-  public void OnKeyReleased(char input){
-    switch(Character.toLowerCase(input)){
-      case 'p':
-        pauseRequested = false;
-        break;
+    for(Button button : buttons.values()){
+      button.Display();
     }
-  }
-  public void OnMousePressed(){
     
   }
   
-  public void OnMouseReleased(){
-    
+  private void EnterState(GameState state){
+     buttons.clear();
+     switch(state){
+        case MainMenu:
+          buttons.put("play", new Button(listeners, "playbutton.png",20,20,160,40,1));
+          break;
+        case Playing:
+          buttons.put("exit", new Button(listeners, "pause_default.png",width-60,20,40,40,1));
+          break;
+        
+        case Paused:
+          buttons.put("exit", new Button(listeners, "pause_hovering.png",width-60,20,40,40,1));
+          break;
+        
+        case GameOver:
+          break;
+      } 
   }
+  
+  
+  //called before display to do logic and determien state transitions
+  public GameState Update(GameState state) {
+    
+    
+    GameState nextState = state;
+    switch (state) {
+      case MainMenu:
+       if(buttons.get("play").IsPressed()){
+         nextState = GameState.Playing;
+        }
+        
+        break;
+      case Playing:
+        //fill, textalign, textsize, text
+       if(buttons.get("exit").IsPressed()){
+         nextState = GameState.Paused;
+       }
+        
+        break;
+      case Paused:
+        //fill, textalign, textsize, text
+        if(buttons.get("exit").IsPressed()){
+         nextState = GameState.Playing;
+        }
+        
+        break;
+      case GameOver:
+        break;
+     
+    }
+    
+    print("yo");
+    if(prevState != nextState){
+      EnterState(nextState);
+    }
+    
+    prevState = state;
+    return nextState;
+  } 
 }

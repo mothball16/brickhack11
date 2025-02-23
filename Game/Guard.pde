@@ -32,7 +32,7 @@ class Guard extends GameElement{
   
   @Override
   public void Display(){
-    
+    rect(coords.x, coords.y, 20,20);
   }
   
   boolean setGoal(Coordinates c){//FOR SCREEN COORDINATES
