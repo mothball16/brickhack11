@@ -1,12 +1,15 @@
-abstract class Button implements IDrawable, IMouseListener {
+class Button implements IDrawable, IMouseListener {
   PImage img;
   int x, y, priority;
-  public Button(String img, int x, int y, int w, int h, int priority){
+  Runnable onMousePressed, onMouseReleased;
+  public Button(String img, int x, int y, int w, int h, int priority, Runnable onMousePressed, Runnable onMouseReleased){
     this.img = loadImage(img);
     this.img.resize(w, h);
     this.priority = priority; 
     this.x = x;
     this.y = y;
+    this.onMousePressed = onMousePressed;
+    this.onMouseReleased = onMouseReleased;
   }
   
   public void Display(){
@@ -19,6 +22,11 @@ abstract class Button implements IDrawable, IMouseListener {
   
   
   public void OnMousePressed(){
+    if(this.onMousePressed)
+  }
+  
+  public void OnMouseReleased(){
+    
   }
   
   
