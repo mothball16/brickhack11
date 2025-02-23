@@ -5,6 +5,8 @@ ArrayList<IInputListener> inputListeners;
 ArrayList<IMouseListener> mouseListeners;
 ArrayList<IDrawable> drawables;
 GameState state;
+int points = 0;
+int timer = 100; // initialize with how long game lasts (temp val = 100) BOTH THESE VARIABLES(POINTS/TIMER) CAN BE ACCESSED FROM ANY CLASS
 
 void setup(){
   size(768,512);  

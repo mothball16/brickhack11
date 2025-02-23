@@ -1,5 +1,6 @@
 class DrawManager {
   boolean pauseRequested;
+<<<<<<< HEAD
   HashMap<String,Button> buttons;
   ArrayList<IMouseListener> listeners;
   GameState prevState;
@@ -21,6 +22,7 @@ class DrawManager {
         background(50);
         HandleDrawables(drawables);
         break;
+
       
       case Playing:
         background(100);
