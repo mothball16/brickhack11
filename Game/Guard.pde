@@ -185,6 +185,8 @@ class Guard extends GameElement{
     }
     if(coords.equals(map.GetTile(goalCoords)) && !alerted){
       cycleSpots();
+    } else if(coords.equals(map.GetTile(goalCoords))){
+      endAlert();
     }
   }
   
@@ -209,7 +211,18 @@ class Guard extends GameElement{
     double dist = distanceFormula(player.getRow() - screenCoords.getRow(), player.getCol() - screenCoords.getCol());
     //System.out.println(dist + " " + vision);
     if(dist < vision && (angle < lightAngle || (360-angle) < lightAngle)){
-      return true;//alert(player);
+      int rows = (player.getRow() - screenCoords.getRow()) / map.getTileBuffer();
+      int cols = (player.getCol() - screenCoords.getCol()) / map.getTileBuffer();
+      for(int i = 0; i < map.getTileBuffer(); i++){
+        Coordinates c = map.GetTile(new Coordinates(
+        screenCoords.getRow() + rows * (i+1),
+        screenCoords.getCol() + cols * (i+1) ));
+        if(grid[c.getRow()][c.getCol()].GetCollidable()){
+          return false;
+        }
+        
+      }
+      return alert(player);
     } else{
       return false;
     }
