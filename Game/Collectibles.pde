@@ -31,7 +31,7 @@
   
 }*/
 
-class Collectible extends GameElement implements IDrawable {
+/**class Collectible extends GameElement implements IDrawable {
   PImage image;
   static int PICKUP = 24; 
   Tile location;
@@ -47,9 +47,9 @@ class Collectible extends GameElement implements IDrawable {
     
   }
   
-  public void Update() {
+  /**public void Update() {
     if ((Player.GetX-
-  }
+  }*/
   
   
-}
+//}
