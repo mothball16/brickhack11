@@ -38,11 +38,11 @@ class Guard extends GameElement{
     setGoal(map.GetTilePos(patrol.peek().getRow(), patrol.peek().getCol()));
     patrolSpots = patrol;
     
-    upWalk = new Animation("upWalk.png", 2, 16, 32, 10, true);
-    downIdle = new Animation("downIdle.png", 1, 16, 32, 10, true);
-    downWalk = new Animation("downWalk.png", 2, 16, 32, 10, true);
-    leftWalk = new Animation("leftWalk.png", 2, 16, 32, 10, true);
-    rightWalk = new Animation("rightWalk.png", 2, 16, 32, 10, true);
+    upWalk = new Animation("guard_upWalk.png", 2, 32, 32, 10, true);
+    downIdle = new Animation("guard_downIdle.png", 1, 32, 32, 10, true);
+    downWalk = new Animation("guard_downWalk.png", 2, 32, 32, 10, true);
+    leftWalk = new Animation("guard_leftWalk.png", 2, 32, 32, 10, true);
+    rightWalk = new Animation("guard_rightWalk.png", 2, 32, 32, 10, true);
     lastAnim = downIdle;
     currentAnim = downIdle;
   }
