@@ -41,12 +41,7 @@ void setup(){
   
   drawables.add(map);
   inputListeners.add(player);
-  drawables.add(player);
-  
-  Guard guard = new Guard(map, 0, 0);
-  guard.setGoal(new Coordinates(326, 272));
-  System.out.print(guard.toString());
-  
+  drawables.add(player); 
 }
 
 
