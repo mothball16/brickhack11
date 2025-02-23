@@ -13,7 +13,7 @@ class GuardManager{
   
   public void addGuard(Guard guard){
     guards.add(guard);
-    
+    drawables.add(guard);
   }
   
   public boolean removeGuard(Guard guard){
@@ -28,8 +28,7 @@ class GuardManager{
   
   public void moveAllGuards(Coordinates player){
     for(Guard guard : guards){
-      guard.move();
-      guard.canSeePlayer(player);
+       guard.Update();
     }
   }
 } 

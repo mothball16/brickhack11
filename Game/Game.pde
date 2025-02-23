@@ -41,8 +41,9 @@ void setup(){
   drawables.add(map);
   inputListeners.add(player);
   drawables.add(player);
-  //drawables.add(guard);
-  
+  guard = new Guard(map, 10, 10);
+  drawables.add(guard);
+
   
 /*
 >>>>>>> 4443a31c17625fdca977e2a9aabb0f35c9932cc3
