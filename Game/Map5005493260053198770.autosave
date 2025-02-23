@@ -15,10 +15,6 @@ class Map extends GameElement {
      }
      return tileMap;
   }
-  
-  public float GetHeightDiff(int rowA, int colA, int rowB, int colB){
-        return Math.abs(heightMap[rowB][colB] - heightMap[rowA][colA]);
-  }
 
   public float[][] LoadHeightMap(String filePath, String[][] mapData)
   {
@@ -76,11 +72,11 @@ class Map extends GameElement {
 
       break;
       case "waffle":
-            grid[row][col].AddDrop(new Collectible("Waffle.png", 100, 40,40));
+            grid[row][col].AddDrop(new Collectible("Waffle.png", 100, 16,16));
 
       break;
       case "diningDollars":
-            grid[row][col].AddDrop(new Collectible("DiningDollars.png", 100, 40,40));
+            grid[row][col].AddDrop(new Collectible("DiningDollars.png", 100, 16,16));
 
       break;
     }

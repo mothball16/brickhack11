@@ -51,6 +51,7 @@ class Collectible implements IDrawable {
   }
 
   public void Display(){
+    print("hi");
     image(image,x - sX/2,y - sY/2, sX, sY);
   }
   
