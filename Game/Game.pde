@@ -1,4 +1,4 @@
-GameStateManager manager;
+DrawManager manager;
 Map map;
 String[][] mapData;
 ArrayList<IInputListener> inputListeners;
@@ -7,12 +7,13 @@ ArrayList<IDrawable> drawables;
 GameState state;
 
 void setup(){
-  size(800,600);  
+  size(768,512);  
 
   state = GameState.MainMenu;
-  manager = new GameStateManager();
   inputListeners = new ArrayList<IInputListener>();
   mouseListeners = new ArrayList<IMouseListener>();
+  manager = new DrawManager(mouseListeners,state);
+
   drawables = new ArrayList<IDrawable>();
   
   TileFactory.RegisterTile("d", new Tile(true));
@@ -34,24 +35,18 @@ void setup(){
 
   map = new Map(32,mapData);
   drawables.add(map);
-<<<<<<< HEAD
   
   
-  Guard guard = new Guard(map.getGrid(), 0, 0);
-=======
   Guard guard = new Guard(map, 0, 0);
->>>>>>> 436015d5c02e4ea9cdf2263d6e487a5d25970ee4
   guard.setGoal(mapData.length-1, mapData[0].length-1);
   System.out.print(guard.toString());
 }
 
 
 void draw(){
-  background(200);
+  state = manager.Update(state);
+  manager.DrawToScreen(drawables,state);
 
-  for(IDrawable drawable : drawables){
-    drawable.Display();
-  }
 }
 
 void keyPressed(){
