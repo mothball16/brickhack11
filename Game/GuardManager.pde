@@ -1,4 +1,4 @@
-/**import java.util.ArrayList;
+import java.util.ArrayList;
 
 class GuardManager{
   ArrayList<Guard> guards;
@@ -11,9 +11,18 @@ class GuardManager{
     this(new ArrayList<Guard>());
   }
   
-  public moveAllGuards(){
+  public void addGuard(Guard guard){
+    guards.add(guard);
+  }
+  
+  public boolean removeGuard(Guard guard){
+    return guards.remove(guard);
+  }
+  
+  public void moveAllGuards(){
     for(Guard guard : guards){
-      //move guards
+      guard.move();
     }
-} */
+  }
+} 
     
