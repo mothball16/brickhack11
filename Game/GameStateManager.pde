@@ -86,10 +86,14 @@ class DrawManager {
         Camera.Update(player.GetX(), player.GetY());
         player.Update(map);
         guardManager.moveAllGuards(new Coordinates((int)player.GetX(), (int)player.GetY()));
-        guard.Update();
+        timer--;
         //fill, textalign, textsize, text
        if(buttons.get("exit").IsPressed()){
          nextState = GameState.Paused;
+       }
+       //System.out.println("\n"+timer);
+       if(timer == 0){
+         nextState = GameState.GameOver;
        }
         
         break;

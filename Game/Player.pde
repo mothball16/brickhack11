@@ -67,7 +67,7 @@ public class Player extends GameElement implements IInputListener {
     moving = true;
     float nx = (left ? -1 : 0) + (right ? 1 : 0);
     float ny = (up ? -1 : 0) + (down ? 1 : 0);
-    System.out.println("X: " + x + ", Y: " + y);
+    //System.out.println("X: " + x + ", Y: " + y);
     float mult = (float) Math.sqrt(ny*ny + nx*nx);
     if(mult == 0){
       moving = false; 
@@ -78,13 +78,12 @@ public class Player extends GameElement implements IInputListener {
      ny /= mult;
      
      Coordinates xTile = map.GetTile(new Coordinates((int) y, (int) (x + nx * speed)));
-
-     if(xTile.getCol() < map.GetWidth() && !map.getGrid()[xTile.getRow()][xTile.getCol()].GetCollidable()
+     if(xTile.getCol() < map.GetWidth() && xTile.getCol() > 0 && !map.getGrid()[xTile.getRow()][xTile.getCol()].GetCollidable()
      && map.GetHeightDiff(xTile.getRow(),xTile.getCol()) < 0.9){
        x += nx * speed;
      }
      Coordinates yTile = map.GetTile(new Coordinates((int) (y + ny * speed), (int) x));
-     if(yTile.getRow() < map.GetHeight() && !map.getGrid()[yTile.getRow()][yTile.getCol()].GetCollidable()
+     if(yTile.getRow() < map.GetHeight() && yTile.getRow() > 0 && !map.getGrid()[yTile.getRow()][yTile.getCol()].GetCollidable()
      && map.GetHeightDiff(yTile.getRow(),yTile.getCol()) < 0.9){
        y += ny * speed;
      }

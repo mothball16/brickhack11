@@ -11,7 +11,7 @@ TileFactory tileFactory;
 Player player;
 GameState state;
 int points = 0;
-int timer = 100; // initialize with how long game lasts (temp val = 100) BOTH THESE VARIABLES(POINTS/TIMER) CAN BE ACCESSED FROM ANY CLASS
+int timer = 3000; // initialize with how long game lasts (temp val = 100) BOTH THESE VARIABLES(POINTS/TIMER) CAN BE ACCESSED FROM ANY CLASS
 GuardManager guardManager = new GuardManager();
 
 
@@ -58,6 +58,7 @@ void setup(){
   path1.add(new Coordinates(4, 15));
   path1.add(new Coordinates(5, 1));
   guard = new Guard(map, 5, 1, path1);
+  guardManager.addGuard(guard);
   drawables.add(guard);
 
   

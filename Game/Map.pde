@@ -15,6 +15,10 @@ class Map extends GameElement {
      }
      return tileMap;
   }
+  
+  public float GetHeightDiff(int rowA, int colA, int rowB, int colB){
+        return Math.abs(heightMap[rowB][colB] - heightMap[rowA][colA]);
+  }
 
   public float[][] LoadHeightMap(String filePath, String[][] mapData)
   {

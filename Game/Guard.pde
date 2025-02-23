@@ -147,9 +147,6 @@ class Guard extends GameElement{
       }
       if(goal) break;
     }
-      System.out.println("goal index collidability: " + map.getGrid()
-      [map.GetTile(new Coordinates(goalCoords.getRow(), goalCoords.getCol())).getRow()]
-      [map.GetTile(new Coordinates(goalCoords.getRow(), goalCoords.getCol())).getCol()]);
     HashMap<Coordinates, Coordinates> path = new HashMap<>();
     while(!current.equals(this.coords)){
       path.put(seen.get(current), current);
@@ -191,9 +188,11 @@ class Guard extends GameElement{
     if(!alerted){
       alerted = true;
       setGoal(player);
+      System.out.println(path==null);
       return true;
     } else{
       setGoal(player);
+      System.out.println(path==null);
       return false;
     }
   }
@@ -207,6 +206,8 @@ class Guard extends GameElement{
     patrolSpots.add(patrolSpots.remove(0));
     setGoal(map.GetTilePos(patrolSpots.peek().getRow(), patrolSpots.peek().getCol()));
     System.out.println(this.toString());
+    System.out.println(patrolSpots.peek().toString());
+    
   }
   
   public Coordinates getPos(){
@@ -220,12 +221,11 @@ class Guard extends GameElement{
   }
   
   public Direction move(){
-    System.out.println(path==null);
     int x = speed * (path.get(coords).getRow() - coords.getRow()); 
     int y = speed * (path.get(coords).getCol() - coords.getCol());
     screenCoords = new Coordinates(screenCoords.getRow() + x, screenCoords.getCol() + y);
     Coordinates c = map.GetTilePos(path.get(coords).getRow(), path.get(coords).getCol());
-    if(Math.abs(screenCoords.getRow() - c.getRow()) < speed && Math.abs(screenCoords.getCol() - c.getCol()) < speed){
+    if(map.sameTile(screenCoords, c)){
       coords = path.get(coords);
     }
     if(coords.equals(map.GetTile(goalCoords)) && !alerted){
@@ -284,7 +284,7 @@ class Guard extends GameElement{
     if(dist < vision && (angle < lightAngle || (360-angle) < lightAngle)){
       int rows = (player.getRow() - screenCoords.getRow()) / map.getTileBuffer();
       int cols = (player.getCol() - screenCoords.getCol()) / map.getTileBuffer();
-      for(int i = 0; i < map.getTileBuffer(); i++){
+      /**for(int i = 0; i < map.getTileBuffer(); i++){
         Coordinates c = map.GetTile(new Coordinates(
         screenCoords.getRow() + rows * (i+1),
         screenCoords.getCol() + cols * (i+1) ));
@@ -292,7 +292,8 @@ class Guard extends GameElement{
           return false;
         }
         
-      }
+      }*/
+      System.out.println("Hello");
       return alert(player);
     } else{
       return false;

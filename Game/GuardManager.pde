@@ -29,6 +29,7 @@ class GuardManager{
   public void moveAllGuards(Coordinates player){
     for(Guard guard : guards){
        guard.Update();
+       //guard.canSeePlayer(player);
     }
   }
 } 
