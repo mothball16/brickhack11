@@ -1,0 +1,32 @@
+//x, y, sizeX, sizeY, height
+//third floor *
+0,0,32,8,3
+//second floor left
+0,8,15,9,2
+3,17,9,1,2
+4,17,2,1,2
+//second floor left ramp 2-3
+0,8,2,1,2.5
+//second floor left ramp 1-2
+0,10,2,7,1.5
+//second floor right ramp 2-3
+13,8,2,1,2.5
+//second floor right ramp 1-2
+13,10,2,7,1.5
+//first floor
+0,16,28,6,1
+29,19,3,3,1
+31,17,1,2,1
+//right side middle bottom
+18,12,14,5,1.5
+29,17,2,1,1.5
+//right side middle bottom to upper ramp
+21,14,2,2,1.75
+//right side middle upper
+17,8,14,5,2
+19,13,11,1,2
+//right side middle upper to upper ramp
+22,8,2,2,2.5
+//all the way right ramp *
+30,13,2,4,1.25
+30,9,2,4,1.75
