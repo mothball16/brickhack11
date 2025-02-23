@@ -3,6 +3,8 @@ class DrawManager {
   HashMap<String,Button> buttons;
   ArrayList<IMouseListener> listeners;
   GameState prevState;
+  GuardManager guardManager = new GuardManager();
+  
   public DrawManager(ArrayList<IMouseListener> listeners, GameState currentState){
     this.listeners = listeners;
     buttons = new HashMap<>();
@@ -84,6 +86,8 @@ class DrawManager {
       case Playing:
         Camera.Update(player.GetX(), player.GetY());
         player.Update(map);
+        guardManager.moveAllGuards(new Coordinates((int)player.GetX(), (int)player.GetY()));
+        
         //fill, textalign, textsize, text
        if(buttons.get("exit").IsPressed()){
          nextState = GameState.Paused;

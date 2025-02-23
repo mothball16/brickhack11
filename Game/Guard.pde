@@ -247,10 +247,10 @@ class Guard extends GameElement{
       return Direction.Left;
     } if(y > 0){
       guardAngle = 90;
-      return Direction.Down;
-    } if(y < 0){
+      return Direction.Bottom;
+    } else{
       guardAngle = 270;
-      return Direction.Up;
+      return Direction.Top;
     }
     
   }

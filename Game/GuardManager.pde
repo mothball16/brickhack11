@@ -19,9 +19,16 @@ class GuardManager{
     return guards.remove(guard);
   }
   
+  public Guard createGuard(Map map, LinkedList<Coordinates> patrol){
+    Guard guard = new Guard(map, patrol.peek().getRow(), patrol.peek().getCol(), patrol);
+    addGuard(guard);
+    return guard;
+  }
+  
   public void moveAllGuards(Coordinates player){
     for(Guard guard : guards){
       guard.move();
+      guard.canSeePlayer(player);
     }
   }
 } 
