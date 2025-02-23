@@ -2,13 +2,13 @@ class Map extends GameElement {
   private final Tile[][] grid; 
   private int tileBuffer;
   
-  public Map(int tileBuffer, String[][] mapData){
+  public Map(TileFactory tileFactory, int tileBuffer, String[][] mapData){
     super(1);
     this.tileBuffer = tileBuffer;
     grid = new Tile[mapData.length][mapData[0].length];
     for(int row = 0; row < mapData.length; row++){
       for(int col = 0; col < mapData[row].length; col++){
-        grid[row][col] = TileFactory.Create(mapData[row][col]);
+        grid[row][col] = tileFactory.Create(Integer.parseInt(mapData[row][col]));
       }
     }  
   }

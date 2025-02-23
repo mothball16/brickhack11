@@ -4,6 +4,7 @@ String[][] mapData;
 ArrayList<IInputListener> inputListeners;
 ArrayList<IMouseListener> mouseListeners;
 ArrayList<IDrawable> drawables;
+TileFactory tileFactory;
 Player player;
 GameState state;
 int points = 0;
@@ -16,7 +17,7 @@ public String[][] LoadFile(String filePath){
      String[][] tileMap = new String[Integer.parseInt(lines[0].split(",")[0])][Integer.parseInt(lines[0].split(",")[1])];
      
      for(int i = 1; i < lines.length; i++){
-       String[] data = lines[i].replaceAll("\\s+","").split(",");
+       String[] data = lines[i].replaceAll("\\s+","").split(";");
        tileMap[i-1] = data;
      }
      return tileMap;
@@ -24,7 +25,7 @@ public String[][] LoadFile(String filePath){
   
 void setup(){
   size(768,512);  
-
+  tileFactory = new TileFactory("tileset.png","tileData.txt");
 
   //init vars
   state = GameState.MainMenu;
@@ -35,13 +36,20 @@ void setup(){
   player = new Player(new Coordinates(20,20));
   
   //load content
-  TileFactory.RegisterTile("d", new Tile(null,true,true));
-  TileFactory.RegisterTile("e", new Tile("empty_tile.png", false,false));
-  map = new Map(32,LoadFile("mapData.txt"));
+  map = new Map(tileFactory,32,LoadFile("mapData.txt"));
   
   drawables.add(map);
   inputListeners.add(player);
+<<<<<<< HEAD
   drawables.add(player); 
+=======
+  drawables.add(player);
+  
+  //Guard guard = new Guard(map, 0, 0);
+  //guard.setGoal(new Coordinates(326, 272));
+  //System.out.print(guard.toString());
+  
+>>>>>>> 9f565ab4369414b741e61f57fba0d29230023834
 }
 
 

@@ -215,6 +215,7 @@ class Guard extends GameElement{
     }
   }
   
+  
   @Override
   String toString(){
     String str = "";

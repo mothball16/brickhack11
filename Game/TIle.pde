@@ -6,24 +6,28 @@
 public class Tile implements Cloneable {  
   PImage img;
   boolean collidable, opaque;
-  
-  
+  int id;
   
   public Tile(String img, boolean collidable, boolean opaque){
+    this(loadImage(img), collidable, opaque,1);
+    
+  }
+  public Tile(PImage img, boolean collidable, boolean opaque, int id){
     this.collidable = collidable;
     this.opaque = opaque;
-    if(img != null) this.img = loadImage(img);
+    this.img = img;
+    this.id = id;
+    img.resize(32,32);
   }
 
-  
-  
-  
   public void DisplayAt(int x, int y, int buffer){
       if(img == null){
         rect(x,y,buffer,buffer);
         return;
       }
       image(img, x, y);
+      textSize(20);
+      text(id,x,y);
   }
 
   public boolean GetOpaque(){ 
