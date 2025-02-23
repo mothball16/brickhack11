@@ -107,6 +107,7 @@ class Guard extends GameElement{
   
   
   boolean validCoords(int row, int col){//FOR ARRAY INDEXES
+  println(row,col);
     if(grid != null && row < grid.length && row >= 0 
     && col >= 0 && col < grid[0].length
     && !grid[row][col].GetCollidable()){
@@ -116,6 +117,7 @@ class Guard extends GameElement{
     }
   }
   boolean validCoords(Coordinates c){//FOR SCREEN COORDINATES
+    //print(c.getCol(), c.getRow());
     Coordinates gCoords = map.GetTile(c);
     return validCoords(gCoords.getRow(), gCoords.getCol());
   }

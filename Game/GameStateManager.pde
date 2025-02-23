@@ -25,10 +25,11 @@ class DrawManager {
       
       case Playing:
         background(100);
-        drawCameraOverlay(true);
         pushMatrix();
         translate(-Camera.GetX() + width/2 - 10, -Camera.GetY() + height/2 - 10);
         HandleDrawables(drawables);
+                drawCameraOverlay(true);
+
         popMatrix();
         break;
         
@@ -55,9 +56,13 @@ class DrawManager {
      switch(state){
         case MainMenu:
           buttons.put("play", new Button(listeners, "playbutton.png",20,20,160,40,1));
+          
           break;
         case Playing:
           buttons.put("exit", new Button(listeners, "pause_default.png",width-60,20,40,40,1));
+
+            map.AddCollectible("cheeseburger", 1, 1);
+          
           break;
         
         case Paused:

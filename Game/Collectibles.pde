@@ -31,25 +31,30 @@
   
 }*/
 
-class Collectible extends GameElement implements IDrawable {
+
+class Collectible implements IDrawable {
   PImage image;
-  static int PICKUP = 24; 
-  Tile location;
-  int points;
+  int points,x,y, sX, sY;
   
-  public Collectible(String image, int points, Tile location) {
-    image = loadImage();
-    this.location = location;
+  
+  public Collectible(String image, int points, int sX, int sY) {
+    this.image = loadImage(image);
     this.points = points;
-  }
-  
-  public void Display() {
     
+    this.sX = sX;
+    this.sY = sY;  
   }
   
-  public void Update() {
-    if ((Player.GetX-
+  public void UpdateLocation(int x, int y){
+    this.x = x;
+    this.y = y;
   }
+
+  public void Display(){
+    image(image,x - sX/2,y - sY/2, sX, sY);
+  }
+  
+  public int GetPriority(){return 1;}
   
   
 }

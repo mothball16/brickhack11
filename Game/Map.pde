@@ -45,7 +45,8 @@ class Map extends GameElement {
       for(int col = 0; col < mapData[row].length; col++){
         grid[row][col] = tileFactory.Create(Integer.parseInt(mapData[row][col]));
       }
-    }  
+    }
+    
   }
   
   
@@ -57,6 +58,32 @@ class Map extends GameElement {
     Coordinates playerOn = GetTile(new Coordinates((int)player.x,(int)player.y));
     return Math.abs(heightMap[row][col] - heightMap[playerOn.getCol()][playerOn.getRow()]);
   }
+  
+  
+  
+  public void AddCollectible(String id, int row, int col){
+    switch(id){
+      case "garbagePlate":
+      grid[row][col].AddDrop(new Collectible("GarbagePlate.png", 100, 16,16));
+      break;
+      case "cheeseburger":
+                  grid[row][col].AddDrop(new Collectible("GarbagePlate.png", 100, 16,16));
+
+
+      break;
+      case "waffle":
+            grid[row][col].AddDrop(new Collectible("GarbagePlate.png", 100, 16,16));
+
+      break;
+      case "diningDollars":
+            grid[row][col].AddDrop(new Collectible("GarbagePlate.png", 100, 16,16));
+
+      break;
+    }
+      
+  }
+  
+
   
   @Override
   public void Display(){
