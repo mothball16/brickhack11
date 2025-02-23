@@ -4,6 +4,7 @@ String[][] mapData;
 ArrayList<IInputListener> inputListeners;
 ArrayList<IMouseListener> mouseListeners;
 ArrayList<IDrawable> drawables;
+Guard guard;
 TileFactory tileFactory;
 Player player;
 GameState state;
@@ -34,8 +35,10 @@ void setup(){
   inputListeners.add(player);
   drawables.add(player);
   
-  //Guard guard = new Guard(map, 0, 0);
-  //guard.setGoal(new Coordinates(326, 272));
+  guard = new Guard(map, 10, 10);
+  drawables.add(guard);
+  guard.setGoal(new Coordinates(326, 272));
+  
   //System.out.print(guard.toString());
 }
 
