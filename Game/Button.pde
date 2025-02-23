@@ -22,7 +22,7 @@ class Button implements IDrawable, IMouseListener {
   
   
   public void OnMousePressed(){
-    if(this.onMousePressed)
+    //if(this.onMousePressed)
   }
   
   public void OnMouseReleased(){

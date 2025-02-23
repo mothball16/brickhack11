@@ -29,4 +29,9 @@ class Coordinates{
   int hashCode(){
     return (x*1000) + (y);
   }
+  
+  @Override
+  String toString(){
+    return ("[" + x + ", " + y + "]");
+  }
 }

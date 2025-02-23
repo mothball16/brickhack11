@@ -34,14 +34,8 @@ void setup(){
 
   map = new Map(32,mapData);
   drawables.add(map);
-<<<<<<< HEAD
-  
-  
-  Guard guard = new Guard(map.getGrid(), 0, 0);
-=======
   Guard guard = new Guard(map, 0, 0);
->>>>>>> 436015d5c02e4ea9cdf2263d6e487a5d25970ee4
-  guard.setGoal(mapData.length-1, mapData[0].length-1);
+  guard.setGoal(new Coordinates(326, 272));
   System.out.print(guard.toString());
 }
 
