@@ -24,6 +24,7 @@ class DrawManager {
       
       case Playing:
         background(100);
+        drawCameraOverlay();
         pushMatrix();
         translate(-Camera.GetX() + width/2 - 10, -Camera.GetY() + height/2 - 10);
         HandleDrawables(drawables);
@@ -109,9 +110,71 @@ class DrawManager {
     return nextState;
   }
   
-  public drawPlayerOverlay() {
+  public void drawCameraOverlay() {
+    stroke(255);
+    strokeWeight(width/(width/3));
+  
+    //External corners
+    int ratioedWidthGap = width/(width/15);
+    int ratioedHeightGap = height/(height/15);
+    //top left
+    line(ratioedWidthGap, ratioedHeightGap, ratioedWidthGap+(height/6), ratioedHeightGap);
+    line(ratioedWidthGap, ratioedHeightGap, ratioedWidthGap, ratioedHeightGap+(height/6));
+    //top right
+    line(width - ratioedWidthGap, ratioedHeightGap, (width - ratioedWidthGap)-(height/6), ratioedHeightGap);
+    line(width - ratioedWidthGap, ratioedHeightGap, width - ratioedWidthGap, ratioedHeightGap+(height/6));
+    //bottom left
+    line(ratioedWidthGap, height - ratioedHeightGap, ratioedWidthGap+(height/6), height - ratioedHeightGap);
+    line(ratioedWidthGap, height - ratioedHeightGap, ratioedWidthGap, (height - ratioedHeightGap)-(height/6));
+    //bottom right
+    line(width - ratioedWidthGap, height - ratioedHeightGap, (width - ratioedWidthGap)-(height/6), height - ratioedHeightGap);
+    line(width - ratioedWidthGap, height - ratioedHeightGap, width - ratioedWidthGap, (height - ratioedHeightGap)-(height/6));
+  
+    //Rec graphic and text
+    fill(255, 0, 0);
+    circle(55, 55, 40);
+    fill(255, 255, 255);
+    PFont arial = createFont("arial.ttf", 45);
+    textFont(arial);
+    text("REC", 85, 71);
     
+    //Internal corners
+    strokeWeight(1);
+    ratioedWidthGap = width/(width/250) + width/8;
+    ratioedHeightGap = height/(height/170) + height/10;
+    //top left
+    line(ratioedWidthGap, ratioedHeightGap, ratioedWidthGap+(height/20), ratioedHeightGap);
+    line(ratioedWidthGap, ratioedHeightGap, ratioedWidthGap, ratioedHeightGap+(height/20));
+    //top right
+    line(width - ratioedWidthGap, ratioedHeightGap, (width - ratioedWidthGap)-(height/20), ratioedHeightGap);
+    line(width - ratioedWidthGap, ratioedHeightGap, width - ratioedWidthGap, ratioedHeightGap+(height/20));
+    //bottom left
+    line(ratioedWidthGap, height - ratioedHeightGap, ratioedWidthGap+(height/20), height - ratioedHeightGap);
+    line(ratioedWidthGap, height - ratioedHeightGap, ratioedWidthGap, (height - ratioedHeightGap)-(height/20));
+    //bottom right
+    line(width - ratioedWidthGap, height - ratioedHeightGap, (width - ratioedWidthGap)-(height/20), height - ratioedHeightGap);
+    line(width - ratioedWidthGap, height - ratioedHeightGap, width - ratioedWidthGap, (height - ratioedHeightGap)-(height/20));
     
+    //Battery
+    ratioedWidthGap = width - (width/(width/15)+63);
+    ratioedHeightGap = height/(height/15)+20;
+    //Battery outline
+    fill(0, 0, 0);
+    strokeWeight(4);
+    rect(ratioedWidthGap, ratioedHeightGap, 43, 20, 6);
+    //Battery positive terminal representation
+    fill(255, 255, 255);
+    strokeWeight(2);
+    rect(ratioedWidthGap+48, ratioedHeightGap+4, 3, 12, 6);
+    //Battery inside/fill indicator
+    beginShape();
+    vertex(ratioedWidthGap+5, ratioedHeightGap+15);
+    vertex(ratioedWidthGap+5, ratioedHeightGap+5);
+    vertex(ratioedWidthGap+20, ratioedHeightGap+5);
+    vertex(ratioedWidthGap+28, ratioedHeightGap+15);
+    vertex(ratioedWidthGap+5, ratioedHeightGap+15);
+    vertex(ratioedWidthGap+5, ratioedHeightGap+5);
+    endShape();
   }
   
 }
