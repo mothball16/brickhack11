@@ -3,7 +3,6 @@ class DrawManager {
   HashMap<String,Button> buttons;
   ArrayList<IMouseListener> listeners;
   GameState prevState;
-  GuardManager guardManager = new GuardManager();
   
   public DrawManager(ArrayList<IMouseListener> listeners, GameState currentState){
     this.listeners = listeners;

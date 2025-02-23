@@ -9,6 +9,7 @@ Player player;
 GameState state;
 int points = 0;
 int timer = 100; // initialize with how long game lasts (temp val = 100) BOTH THESE VARIABLES(POINTS/TIMER) CAN BE ACCESSED FROM ANY CLASS
+GuardManager guardManager = new GuardManager();
 
 
 
@@ -26,16 +27,27 @@ void setup(){
   drawables = new ArrayList<IDrawable>();
   manager = new DrawManager(mouseListeners,state);
   player = new Player(new Coordinates(20,40));
+  /**LinkedList<Coordinates> path = new LinkedList<>();
+  path.add(new Coordinates(5, 1));
+  path.add(new Coordinates(20, 1));
+  path.add(new Coordinates(5, 28));
+  path.add(new Coordinates(20, 28));*/
+  
+  
   
   //load content
   map = new Map(tileFactory,32,"mapData.txt","heightData.txt");
+  /**Guard guard = new Guard(map, 4, 1, path);
+  System.out.println(guard.setGoal(10, 2));
+  System.out.println(guard.toString());
+  guardManager.addGuard(guard);*/
+  
   drawables.add(map);
   inputListeners.add(player);
   drawables.add(player);
+  //drawables.add(guard);
   
-  //Guard guard = new Guard(map, 0, 0);
-  //guard.setGoal(new Coordinates(326, 272));
-  //System.out.print(guard.toString());
+  
 }
 
 

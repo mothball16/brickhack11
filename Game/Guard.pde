@@ -274,7 +274,6 @@ class Guard extends GameElement{
   public boolean canSeePlayer(Coordinates player){
     double angle = getAngle(player);
     double dist = distanceFormula(player.getRow() - screenCoords.getRow(), player.getCol() - screenCoords.getCol());
-    //System.out.println(dist + " " + vision);
     if(dist < vision && (angle < lightAngle || (360-angle) < lightAngle)){
       int rows = (player.getRow() - screenCoords.getRow()) / map.getTileBuffer();
       int cols = (player.getCol() - screenCoords.getCol()) / map.getTileBuffer();
@@ -299,7 +298,11 @@ class Guard extends GameElement{
     String str = "";
     for(int i = 0; i < this.grid.length; i++){
       for(int j = 0; j < this.grid[0].length; j++){
-        str += path.containsKey(new Coordinates(i, j)) ? "X" : "*";
+        if(path.containsKey(new Coordinates(i, j))){
+          str += "X";
+        } else {
+          str += grid[i][j].GetCollidable() ? "*" : ".";
+        }
       }
       str += "\n";
     }
