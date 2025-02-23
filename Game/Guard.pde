@@ -1,17 +1,33 @@
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.lang.Math;
 
 class Guard extends GameElement{
-  Tile grid[][];
-  HashMap<Coordinates, Coordinates> path = null;
-  Coordinates coords;
-  Coordinates goalCoords;
   
-  public Guard(Tile board[][], int row, int col){
+  private Map map;
+  private Tile grid[][];
+  private HashMap<Coordinates, Coordinates> path = null;
+  private Coordinates coords;
+  private Coordinates goalCoords;
+  
+  private int speed = 3;
+  private Coordinates screenCoords;
+  private LinkedList<Coordinates> patrolSpots;
+  private boolean alerted = false;
+  
+  
+  
+  public Guard(Map gameMap, int row, int col, LinkedList<Coordinates> patrol){
     super(3);
-    grid = board;
+    map = gameMap;
+    grid = map.getGrid();
     coords = new Coordinates(row, col);
+    screenCoords = map.GetTilePos(coords.getRow(), coords.getCol());
+  }
+  
+  public Guard(Map gameMap, int row, int col){
+    this(gameMap, row, col, new LinkedList<Coordinates>());
   }
   
   @Override
@@ -19,25 +35,31 @@ class Guard extends GameElement{
     
   }
   
-  boolean setGoal(int row, int col){
-    if(validCoords(row, col)){
-      goalCoords = new Coordinates(row, col);
+  boolean setGoal(Coordinates c){
+    if(validCoords(c)){
+      goalCoords = c;
       path = getPath();
       return true;
     } else{
       return false;
     }
   }
+  boolean setGoal(int row, int col){
+    return setGoal(new Coordinates(row, col));
+  }
+    
   
-  boolean setCoordinates(int row, int col){
-    if(validCoords(row, col)){
-      goalCoords = new Coordinates(row, col);
+  boolean setCoordinates(Coordinates c){
+    if(validCoords(c)){
+      goalCoords = c;
       return true;
     } else{
       return false;
     }
   }
-  
+  boolean setCoordinates(int row, int col){
+    return setCoordinates(new Coordinates(row, col));
+  }
   
   
   boolean validCoords(int row, int col){
@@ -49,12 +71,17 @@ class Guard extends GameElement{
       return false;
     }
   }
+  boolean validCoords(Coordinates c){
+    return validCoords(c.getRow(), c.getCol());
+  }
+  
+  
   
   Coordinates getCoords(){
     return coords;
   }
   
-  private HashMap<Coordinates, Coordinates> getPath(){
+  HashMap<Coordinates, Coordinates> getPath(){
     LinkedList<Coordinates> queue = new LinkedList();
     Coordinates current = this.coords;
     queue.add(current);
@@ -106,6 +133,54 @@ class Guard extends GameElement{
       }
     }
     return neighbors;
+  }
+  
+  public boolean isAlerted(){
+    return alerted;
+  }
+  
+  public boolean alert(int row, int col){
+    if(!alerted){
+      alerted = true;
+      setGoal(row, col);
+      return true;
+    } else{
+      setGoal(row, col);
+      return false;
+    }
+  }
+  
+  public void endAlert(){
+    alerted = false;
+    setGoal(patrolSpots.peek());
+  }
+  
+  public void cycleSpots(){
+    patrolSpots.add(patrolSpots.remove(0));
+    setGoal(patrolSpots.peek());
+  }
+  
+  public Coordinates getPos(){
+    return screenCoords;
+  }
+  
+  public void setPos(Coordinates c){
+    if(validCoords(c)){
+      screenCoords = c;
+    }
+  }
+  
+  public void move(){
+    int x = screenCoords.getRow() + speed * (path.get(coords).getRow() - coords.getRow()); 
+    int y = screenCoords.getCol() + speed * (path.get(coords).getCol() - coords.getCol());
+    screenCoords = new Coordinates(x, y);
+    Coordinates c = map.GetTilePos(path.get(coords).getRow(), path.get(coords).getCol());
+    if(Math.abs(screenCoords.getRow() - c.getRow()) < speed && Math.abs(screenCoords.getCol() - c.getCol()) < speed){
+      coords = path.get(coords);
+    }
+    if(goalCoords.equals(coords) && !alerted){
+      cycleSpots();
+    }
   }
   
   @Override
