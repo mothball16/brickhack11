@@ -25,11 +25,10 @@ void setup(){
   mouseListeners = new ArrayList<IMouseListener>();
   drawables = new ArrayList<IDrawable>();
   manager = new DrawManager(mouseListeners,state);
-  player = new Player(new Coordinates(20,20));
+  player = new Player(new Coordinates(20,40));
   
   //load content
   map = new Map(tileFactory,32,"mapData.txt","heightData.txt");
-  
   drawables.add(map);
   inputListeners.add(player);
   drawables.add(player);

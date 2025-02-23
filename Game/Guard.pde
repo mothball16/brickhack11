@@ -5,13 +5,19 @@ import java.lang.Math;
 
 class Guard extends GameElement{
   
+  Animation upWalk, downWalk, rightWalk, leftWalk, downIdle;
+  Animation currentAnim, lastAnim;
+  Direction dir;
+  
+  
+  
   private Map map;
   private Tile grid[][];
   private HashMap<Coordinates, Coordinates> path = null;
   private Coordinates coords;
   private Coordinates goalCoords;
   
-  private int speed = 3;
+  private int speed = 1;
   private double guardAngle = 0.0;
   private int vision; 
   private double lightAngle = 45.0; //number of degrees from the direction the guard is looking (mirrored across the center, so the total angle is doubled
@@ -28,15 +34,47 @@ class Guard extends GameElement{
     vision = 5 * map.getTileBuffer();
     coords = new Coordinates(row, col);
     screenCoords = map.GetTilePos(coords.getRow(), coords.getCol());
+    dir = Direction.Bottom;
+    
+    upWalk = new Animation("upWalk.png", 2, 16, 32, 10, true);
+    downIdle = new Animation("downIdle.png", 1, 16, 32, 10, true);
+    downWalk = new Animation("downWalk.png", 2, 16, 32, 10, true);
+    leftWalk = new Animation("leftWalk.png", 2, 16, 32, 10, true);
+    rightWalk = new Animation("rightWalk.png", 2, 16, 32, 10, true);
+    lastAnim = downIdle;
+    currentAnim = downIdle;
   }
   
   public Guard(Map gameMap, int row, int col){
     this(gameMap, row, col, new LinkedList<Coordinates>());
   }
   
+  private Animation ChooseAnimation(){
+    if(dir == null) return downIdle;
+    switch(dir){
+      case Top:
+      return upWalk;
+      case Bottom:
+      return downWalk;
+      case Left:
+      return leftWalk;
+      case Right:
+      return rightWalk;
+    }
+    return downIdle;
+  }
+  
   @Override
   public void Display(){
-    rect(coords.x, coords.y, 20,20);
+    //rect(coords.x, coords.y, 20,20);
+    currentAnim.Display(screenCoords.getCol(),screenCoords.getRow(),2);
+    lastAnim = currentAnim;
+  }
+  
+  public void Update(){
+    dir = move();
+    currentAnim.Update();
+    currentAnim = ChooseAnimation();
   }
   
   boolean setGoal(Coordinates c){//FOR SCREEN COORDINATES
@@ -175,10 +213,10 @@ class Guard extends GameElement{
     }
   }
   
-  public void move(){
-    int x = screenCoords.getRow() + speed * (path.get(coords).getRow() - coords.getRow()); 
-    int y = screenCoords.getCol() + speed * (path.get(coords).getCol() - coords.getCol());
-    screenCoords = new Coordinates(x, y);
+  public Direction move(){
+    int x = speed * (path.get(coords).getRow() - coords.getRow()); 
+    int y = speed * (path.get(coords).getCol() - coords.getCol());
+    screenCoords = new Coordinates(screenCoords.getRow() + x, screenCoords.getCol() + y);
     Coordinates c = map.GetTilePos(path.get(coords).getRow(), path.get(coords).getCol());
     if(Math.abs(screenCoords.getRow() - c.getRow()) < speed && Math.abs(screenCoords.getCol() - c.getCol()) < speed){
       coords = path.get(coords);
@@ -188,6 +226,33 @@ class Guard extends GameElement{
     } else if(coords.equals(map.GetTile(goalCoords))){
       endAlert();
     }
+    
+    if(x > 0 && y > 0){
+      guardAngle = 45;
+      return Direction.Right;
+    } if(x < 0 && y > 0){
+      guardAngle = 135;
+      return Direction.Left;
+    } if(x > 0 && y < 0){
+      guardAngle = 315;
+      return Direction.Right;
+    } if(x < 0 && y < 0){
+      guardAngle = 225;
+      return Direction.Left;
+    } if(x > 0){
+      guardAngle = 0;
+      return Direction.Right;
+    } if(x < 0){
+      guardAngle = 180;
+      return Direction.Left;
+    } if(y > 0){
+      guardAngle = 90;
+      return Direction.Down;
+    } if(y < 0){
+      guardAngle = 270;
+      return Direction.Up;
+    }
+    
   }
   
   public double distanceFormula(double row, double col){

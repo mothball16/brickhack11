@@ -15,12 +15,12 @@ class TileFactory {
         case 2:
           RegisterTile(
           Integer.parseInt(data[0].trim()), 
-          new Tile(tilemap.get((Integer.parseInt(data[0].trim())) * 8, 0, 8, 8), (data[1] == "f" ? false : true), false,Integer.parseInt(data[0].trim())));
+          new Tile(tilemap.get((Integer.parseInt(data[0].trim())) * 8, 0, 8, 8), (data[1].equals("f") ? false : true), false,Integer.parseInt(data[0].trim())));
           break;
         case 3:
           for(int j = Integer.parseInt(data[0].trim()); j <= Integer.parseInt(data[1].trim()); j++){
             RegisterTile(j, 
-            new Tile(tilemap.get((j) * 8,0,8,8), (data[2] == "f" ? false : true), false,j));
+            new Tile(tilemap.get((j) * 8,0,8,8), (data[2].equals("f") ? false : true), false,j));
           }
           break;
        }
