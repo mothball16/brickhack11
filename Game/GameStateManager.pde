@@ -24,7 +24,7 @@ class DrawManager {
       
       case Playing:
         background(100);
-        drawCameraOverlay();
+        drawCameraOverlay(true);
         pushMatrix();
         translate(-Camera.GetX() + width/2 - 10, -Camera.GetY() + height/2 - 10);
         HandleDrawables(drawables);
@@ -110,7 +110,7 @@ class DrawManager {
     return nextState;
   }
   
-  public void drawCameraOverlay() {
+  public void drawCameraOverlay(Boolean gameRunning) {
     stroke(255);
     strokeWeight(width/(width/3));
   
@@ -131,12 +131,22 @@ class DrawManager {
     line(width - ratioedWidthGap, height - ratioedHeightGap, width - ratioedWidthGap, (height - ratioedHeightGap)-(height/6));
   
     //Rec graphic and text
-    fill(255, 0, 0);
-    circle(55, 55, 40);
-    fill(255, 255, 255);
-    PFont arial = createFont("arial.ttf", 45);
-    textFont(arial);
-    text("REC", 85, 71);
+
+    if (gameRunning) {
+      fill(255, 0, 0);
+      circle(55, 55, 40);
+      fill(255, 255, 255);
+      PFont arial = createFont("arial.ttf", 45);
+      textFont(arial);
+      text("REC", 85, 71);
+    } else {
+      fill(0, 0, 0);
+      circle(55, 55, 40);
+      fill(255, 255, 255);
+      PFont arial = createFont("arial.ttf", 45);
+      textFont(arial);
+      text("STOP", 85, 71);
+    }
     
     //Internal corners
     strokeWeight(1);
