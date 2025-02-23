@@ -33,8 +33,8 @@ public class Player extends GameElement implements IInputListener {
     return (int)y; 
   }
   
-  public void Update(){
-    dir = Move();
+  public void Update(Map map){
+    dir = Move(map);
     currentAnim.Update();
     currentAnim = ChooseAnimation();
   }
@@ -63,22 +63,28 @@ public class Player extends GameElement implements IInputListener {
   }
   
   
-  private Direction Move(){
+  private Direction Move(Map map){
     moving = true;
     float nx = (left ? -1 : 0) + (right ? 1 : 0);
-     float ny = (up ? -1 : 0) + (down ? 1 : 0);
-     System.out.println("X: " + x + ", Y: " + y);
-     float mult = (float) Math.sqrt(ny*ny + nx*nx);
-     if(mult == 0){
-       moving = false; 
-       return null;  
-     }
+    float ny = (up ? -1 : 0) + (down ? 1 : 0);
+    System.out.println("X: " + x + ", Y: " + y);
+    float mult = (float) Math.sqrt(ny*ny + nx*nx);
+    if(mult == 0){
+      moving = false; 
+      return null;  
+    }
      
      nx /= mult;
      ny /= mult;
      
-     x += nx * speed;
-     y += ny * speed;
+     Coordinates xTile = map.GetTile(new Coordinates((int) (x + nx * speed), (int) y));
+     if(!map.getGrid()[xTile.getRow()][xTile.getCol()].GetCollidable()){
+       x += nx * speed;
+     }
+     Coordinates yTile = map.GetTile(new Coordinates((int) x, (int) (y + ny * speed)));
+     if(!map.getGrid()[yTile.getRow()][yTile.getCol()].GetCollidable()){
+       y += ny * speed;
+     }
      
      if(ny < 0) return Direction.Top;
      if(ny > 0) return Direction.Bottom;
