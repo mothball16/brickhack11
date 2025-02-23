@@ -1,6 +1,6 @@
 abstract class Collectibles extends GameElement {
   String[] items = {"garbage plate", "dining dollars", "waffles", "cheeseburger"};
-  int[] itemPoints = {75, 5, 14, 40};
+  int[] itemPoints = {400, 100, 150, 250};
   int indexPoint;
 <<<<<<< HEAD
   //gameStateManager pointControl = new gameStateManager();
