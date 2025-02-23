@@ -18,6 +18,9 @@ abstract class Button implements IDrawable, IMouseListener {
   }
   
   
+  public void OnMousePressed(){
+  }
+  
   
   
 }
