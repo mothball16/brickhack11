@@ -35,7 +35,7 @@ class Guard extends GameElement{
     rect(coords.x, coords.y, 20,20);
   }
   
-  boolean setGoal(Coordinates c){
+  boolean setGoal(Coordinates c){//FOR SCREEN COORDINATES
     if(validCoords(c)){
       goalCoords = c;
       path = getPath();
@@ -44,8 +44,8 @@ class Guard extends GameElement{
       return false;
     }
   }
-  boolean setGoal(int row, int col){
-    return setGoal(new Coordinates(row, col));
+  boolean setGoal(int row, int col){//FOR ARRAY INDEXES
+    return setGoal(map.GetTilePos(row, col));
   }
     
   
@@ -62,7 +62,7 @@ class Guard extends GameElement{
   }
   
   
-  boolean validCoords(int row, int col){
+  boolean validCoords(int row, int col){//FOR ARRAY INDEXES
     if(grid != null && row < grid.length && row >= 0 
     && col >= 0 && col < grid[0].length
     && !grid[row][col].GetCollidable()){
@@ -71,8 +71,9 @@ class Guard extends GameElement{
       return false;
     }
   }
-  boolean validCoords(Coordinates c){
-    return validCoords(c.getRow(), c.getCol());
+  boolean validCoords(Coordinates c){//FOR SCREEN COORDINATES
+    Coordinates gCoords = map.GetTile(c);
+    return validCoords(gCoords.getRow(), gCoords.getCol());
   }
   
   
@@ -94,7 +95,7 @@ class Guard extends GameElement{
           seen.put(neighbor, current);
           queue.add(neighbor);
         }
-        if(neighbor.equals(this.goalCoords)){
+        if(neighbor.equals(map.GetTile(this.goalCoords))){
           goal = true;
           current = neighbor;
           break;
@@ -102,6 +103,8 @@ class Guard extends GameElement{
       }
       if(goal) break;
     }
+    System.out.println(this.goalCoords);
+    System.out.println(map.GetTile(this.goalCoords));
     HashMap<Coordinates, Coordinates> path = new HashMap<>();
     while(!current.equals(this.coords)){
       path.put(seen.get(current), current);
@@ -139,13 +142,13 @@ class Guard extends GameElement{
     return alerted;
   }
   
-  public boolean alert(int row, int col){
+  public boolean alert(Coordinates player){
     if(!alerted){
       alerted = true;
-      setGoal(row, col);
+      setGoal(player);
       return true;
     } else{
-      setGoal(row, col);
+      setGoal(player);
       return false;
     }
   }
@@ -157,7 +160,7 @@ class Guard extends GameElement{
   
   public void cycleSpots(){
     patrolSpots.add(patrolSpots.remove(0));
-    setGoal(patrolSpots.peek());
+    setGoal(map.GetTilePos(patrolSpots.peek().getRow(), patrolSpots.peek().getCol()));
   }
   
   public Coordinates getPos(){
@@ -178,7 +181,7 @@ class Guard extends GameElement{
     if(Math.abs(screenCoords.getRow() - c.getRow()) < speed && Math.abs(screenCoords.getCol() - c.getCol()) < speed){
       coords = path.get(coords);
     }
-    if(goalCoords.equals(coords) && !alerted){
+    if(coords.equals(map.GetTile(goalCoords)) && !alerted){
       cycleSpots();
     }
   }
