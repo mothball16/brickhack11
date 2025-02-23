@@ -24,8 +24,11 @@ public String[][] LoadFile(String filePath){
   }
   
 void setup(){
-  size(768,512);  
+  size(768,512, P2D);  
   tileFactory = new TileFactory("tileset.png","tileData.txt");
+  noSmooth();
+  ((PGraphicsOpenGL)g).textureSampling(5);
+ 
 
   //init vars
   state = GameState.MainMenu;

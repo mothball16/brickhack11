@@ -1,5 +1,6 @@
 class Map extends GameElement {
   private final Tile[][] grid; 
+  private final int[][] heightMap;
   private int tileBuffer;
   
   public Map(TileFactory tileFactory, int tileBuffer, String[][] mapData){

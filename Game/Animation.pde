@@ -1,69 +1,50 @@
 
-/*
-
 public class Animation
 {
-    private int fps;
-    private Rectangle[] sourceRects;
-
+    private int framesPerKF;
     public boolean looped;
-    public int frames;
-    public PImage spritesheet:
-    public int anchorX, anchorY;
+    public int timer, currentFrame, frames;
+    public PImage spritesheet;
+    public int anchorX, anchorY,frameWidth,frameHeight;
 
     public double Length, FrameDuration;
     
-    public Animation(String filePath, int frames, int frameWidth, int frameHeight, int fps, boolean looped)
+    public Animation(String filePath, int frames, int frameWidth, int frameHeight, int fpkf, boolean looped)
     {
-        this.fps = fps;
-
+        this.framesPerKF = fpkf;
         this.spritesheet = loadImage(filePath);
         this.looped = looped;
         this.frames = frames;
+        this.frameWidth = frameWidth;
+        this.frameHeight = frameHeight;
 
         
         anchorX = frameWidth/2;
         anchorY = frameHeight;
         
-        
+    }
+    public void ToStart(){
+      timer = 0; 
     }
     
-
-    /// <summary>
-    /// utility method for initializing the source rectangles
-    /// </summary>
-    /// <param name="source"></param>
-    /// <param name="numFrames"></param>
-    /// <param name="width"></param>
-    /// <param name="height"></param>
-    /// <returns></returns>
-    private Rectangle[] InitFrames(Texture2D source, int numFrames, int width, int height)
-    {
-        Rectangle[] frameContainer = new Rectangle[numFrames];
-        int framesPerRow = source.Width / width;
-        for (int i = 0; i < Frames; i++)
-        {
-            int col = i % framesPerRow * width;
-            int row = i / framesPerRow * height;
-            frameContainer[i] = new Rectangle(col, row, width, height);
-        }
-        return frameContainer;
+    public int GetDuration(){
+      return framesPerKF * frames;
+    }
+    
+    public PImage GetCurImage(){
+      return spritesheet.get(timer / framesPerKF * frameWidth, 0, frameWidth, frameHeight);
+    }
+    
+    
+    public void Update(){
+      timer++;
+      print(timer);
+      if(looped) timer %= GetDuration(); 
+    }
+  
+    public void Display(int x, int y, float scale){
+      image(GetCurImage(),x - anchorX * scale, y - anchorY * scale, frameWidth * scale, frameHeight * scale);
     }
 
-    /// <summary>
-    /// tie a sound effect to a frame of the animation
-    /// </summary>
-    /// <param name="sfx"></param>
-    /// <param name="frame"></param>
-    /// <returns></returns>
-    public Animation AddSFX(SoundEffect sfx, int frame)
-    {
-        if (sfxFrames.TryGetValue(frame, out List<SoundEffect> value))
-            value.Add(sfx);
-        else
-            sfxFrames[frame] = [sfx];
 
-        return this;
-    }
-
-}*/
+}
