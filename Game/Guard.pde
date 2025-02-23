@@ -183,6 +183,13 @@ class Guard extends GameElement{
     }
   }
   
+  public double getAngle(Coordinates player){
+    double dRow = Math.abs(screenCoords.getRow() - player.getRow());
+    double dCol = Math.abs(screenCoords.getCol() - player.getCol());
+    double angle = Math.atan(dRow/dCol);
+    return angle;
+  }
+  
   @Override
   String toString(){
     String str = "";
