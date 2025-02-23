@@ -35,19 +35,6 @@ void setup(){
   path.add(new Coordinates(20, 28));*/
   
   
-<<<<<<< HEAD
-  
-  //load content
-  map = new Map(tileFactory,32,"mapData.txt","heightData.txt");
-  /**Guard guard = new Guard(map, 4, 1, path);
-  System.out.println(guard.setGoal(10, 2));
-  System.out.println(guard.toString());
-  guardManager.addGuard(guard);*/
-=======
-
-  player = new Player(new Coordinates(70,160));
->>>>>>> 4443a31c17625fdca977e2a9aabb0f35c9932cc3
-  
   //load content
   map = new Map(tileFactory,32,"mapData.txt","heightMapData.txt");
   
@@ -57,8 +44,6 @@ void setup(){
   //drawables.add(guard);
   
   
-<<<<<<< HEAD
-=======
 /*
 >>>>>>> 4443a31c17625fdca977e2a9aabb0f35c9932cc3
   guard = new Guard(map, 10, 10);
