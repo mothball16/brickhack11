@@ -31,8 +31,12 @@
   
 }*/
 
+<<<<<<< HEAD
+/**class Collectible extends GameElement implements IDrawable {
+=======
 
 class Collectible implements IDrawable {
+>>>>>>> fe63fe5520322cd90f4bfd99b83bffa6dfc830c4
   PImage image;
   int points,x,y, sX, sY;
   
@@ -45,6 +49,11 @@ class Collectible implements IDrawable {
     this.sY = sY;  
   }
   
+<<<<<<< HEAD
+  /**public void Update() {
+    if ((Player.GetX-
+  }*/
+=======
   public void UpdateLocation(int x, int y){
     this.x = x;
     this.y = y;
@@ -56,6 +65,7 @@ class Collectible implements IDrawable {
   }
   
   public int GetPriority(){return 1;}
+>>>>>>> fe63fe5520322cd90f4bfd99b83bffa6dfc830c4
   
   
-}
+//}

@@ -82,7 +82,8 @@ class Guard extends GameElement{
   boolean setGoal(Coordinates c){//FOR SCREEN COORDINATES
     if(validCoords(c)){
       goalCoords = c;
-      path = getPath();
+      HashMap<Coordinates, Coordinates> thing = getPath();
+      path = thing == null ? path : thing;
       return true;
     } else{
       return false;
@@ -190,11 +191,9 @@ class Guard extends GameElement{
     if(!alerted){
       alerted = true;
       setGoal(player);
-      System.out.println(path==null);
       return true;
     } else{
       setGoal(player);
-      System.out.println(path==null);
       return false;
     }
   }
