@@ -12,8 +12,8 @@ class Guard extends GameElement{
   private Coordinates goalCoords;
   
   private int speed = 3;
-  private double angle = 0;
-  private int vision = 5 * map.getTileBuffer();
+  private double guardAngle = 0.0;
+  private int vision; 
   private double lightAngle = 45.0; //number of degrees from the direction the guard is looking (mirrored across the center, so the total angle is doubled
   private Coordinates screenCoords;
   private LinkedList<Coordinates> patrolSpots;
@@ -25,6 +25,7 @@ class Guard extends GameElement{
     super(3);
     map = gameMap;
     grid = map.getGrid();
+    vision = 5 * map.getTileBuffer();
     coords = new Coordinates(row, col);
     screenCoords = map.GetTilePos(coords.getRow(), coords.getCol());
   }
@@ -106,8 +107,6 @@ class Guard extends GameElement{
       }
       if(goal) break;
     }
-    System.out.println(this.goalCoords);
-    System.out.println(map.GetTile(this.goalCoords));
     HashMap<Coordinates, Coordinates> path = new HashMap<>();
     while(!current.equals(this.coords)){
       path.put(seen.get(current), current);
@@ -190,15 +189,14 @@ class Guard extends GameElement{
   }
   
   public double distanceFormula(double row, double col){
-    double distRows = row - screenCoords.getRow();
-    double distCols = col - screenCoords.getCol();
-    return Math.sqrt(distRows*distRows + distCols*distCols);
+    return Math.sqrt(row*row + col*col);
     
   }
   
   public double getAngle(Coordinates player){
-    double lightRow = Math.sin(angle)*vision - screenCoords.getRow();
-    double lightCol = Math.cos(angle)*vision - screenCoords.getCol();
+    double lightRow = Math.sin(Math.toRadians(guardAngle))*vision;
+    double lightCol = Math.cos(Math.toRadians(guardAngle))*vision;
+    
     double playerRow = player.getRow() - screenCoords.getRow();
     double playerCol = player.getCol() - screenCoords.getCol();
     double numerator = (playerRow)*(lightRow) + (playerCol)*(lightCol);
@@ -208,9 +206,10 @@ class Guard extends GameElement{
   
   public boolean canSeePlayer(Coordinates player){
     double angle = getAngle(player);
-    double dist = distanceFormula((player.getRow() - screenCoords.getRow()), (player.getCol() - screenCoords.getCol()));
+    double dist = distanceFormula(player.getRow() - screenCoords.getRow(), player.getCol() - screenCoords.getCol());
+    //System.out.println(dist + " " + vision);
     if(dist < vision && (angle < lightAngle || (360-angle) < lightAngle)){
-      return alert(player);
+      return true;//alert(player);
     } else{
       return false;
     }
