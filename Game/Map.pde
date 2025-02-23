@@ -1,6 +1,6 @@
 class Map extends GameElement {
   private final Tile[][] grid; 
-  private final int[][] heightMap;
+  private final float[][] heightMap;
   private int tileBuffer;
   
   
@@ -16,15 +16,29 @@ class Map extends GameElement {
      return tileMap;
   }
 
-  public int[][] LoadHeightMap(String filePath)
+  public float[][] LoadHeightMap(String filePath, String[][] mapData)
   {
-      return new int[1][1];
+      String[] lines = loadStrings(filePath);
+      float[][] heightMap = new float[mapData.length][mapData[0].length];
+      for(int i = 0; i < lines.length; i++){
+        if(lines[i].charAt(0) == '/') continue;
+        println("checking",i);
+        String[] data = lines[i].replaceAll("\\s+","").split(",");
+        for(int row = Integer.parseInt(data[1]); row < Integer.parseInt(data[1]) + Integer.parseInt(data[3]); row++){
+          for(int col = Integer.parseInt(data[0]); col < Integer.parseInt(data[0]) + Integer.parseInt(data[2]); col++){
+           
+            heightMap[row][col] = Float.parseFloat(data[4]);
+          }
+        }
+        
+      }
+      return heightMap;
   }
   
   public Map(TileFactory tileFactory, int tileBuffer, String filePath, String heightMapPath){
     super(1);
     String[][] mapData = LoadFile(filePath);
-    heightMap = LoadHeightMap(heightMapPath);
+    heightMap = LoadHeightMap(heightMapPath, mapData);
     this.tileBuffer = tileBuffer;
     grid = new Tile[mapData.length][mapData[0].length];
     for(int row = 0; row < mapData.length; row++){
@@ -39,11 +53,18 @@ class Map extends GameElement {
     return grid;
   }
   
+  public float GetHeightDiff(int row, int col){
+    Coordinates playerOn = GetTile(new Coordinates((int)player.x,(int)player.y));
+    return Math.abs(heightMap[row][col] - heightMap[playerOn.getCol()][playerOn.getRow()]);
+  }
+  
   @Override
   public void Display(){
+    Coordinates playerOn = GetTile(new Coordinates((int)player.x,(int)player.y));
+    
     for(int row = 0; row < grid.length; row++){
       for(int col = 0; col < grid[row].length; col++){
-        grid[row][col].DisplayAt(col * tileBuffer, row * tileBuffer,tileBuffer,1);
+        grid[row][col].DisplayAt(col * tileBuffer, row * tileBuffer,tileBuffer,GetHeightDiff(row,col));
       }
     }
   } 
