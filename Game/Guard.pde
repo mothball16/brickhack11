@@ -193,6 +193,7 @@ class Guard extends GameElement{
     return angle;
   }
   
+  
   @Override
   String toString(){
     String str = "";
