@@ -27,7 +27,6 @@ void setup(){
   mouseListeners = new ArrayList<IMouseListener>();
   drawables = new ArrayList<IDrawable>();
   manager = new DrawManager(mouseListeners,state);
-<<<<<<< HEAD
   player = new Player(new Coordinates(20,40));
   /**LinkedList<Coordinates> path = new LinkedList<>();
   path.add(new Coordinates(5, 1));
@@ -43,12 +42,9 @@ void setup(){
   System.out.println(guard.setGoal(10, 2));
   System.out.println(guard.toString());
   guardManager.addGuard(guard);*/
-=======
-  player = new Player(new Coordinates(70,160));
   
   //load content
   map = new Map(tileFactory,32,"mapData.txt","heightMapData.txt");
->>>>>>> 986f9953b36234ba8cecf47fb33447770fa90395
   
   drawables.add(map);
   inputListeners.add(player);
@@ -56,14 +52,11 @@ void setup(){
   //drawables.add(guard);
   
   
-<<<<<<< HEAD
-=======
   guard = new Guard(map, 10, 10);
   drawables.add(guard);
   guard.setGoal(new Coordinates(326, 272));
   
   //System.out.print(guard.toString());
->>>>>>> 986f9953b36234ba8cecf47fb33447770fa90395
 }
 
 
