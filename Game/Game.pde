@@ -5,6 +5,8 @@ ArrayList<IInputListener> inputListeners;
 ArrayList<IMouseListener> mouseListeners;
 ArrayList<IDrawable> drawables;
 Guard guard;
+Guard guard2;
+Guard guard3;
 TileFactory tileFactory;
 Player player;
 GameState state;
@@ -35,7 +37,7 @@ void setup(){
   path.add(new Coordinates(20, 28));*/
   
   //load content
-  map = new Map(tileFactory,32,"mapData.txt","heightData.txt");
+  map = new Map(tileFactory,32,"mapData.txt","heightMapData.txt");
   /**Guard guard = new Guard(map, 4, 1, path);
   System.out.println(guard.setGoal(10, 2));
   System.out.println(guard.toString());
@@ -49,7 +51,13 @@ void setup(){
   drawables.add(map);
   inputListeners.add(player);
   drawables.add(player);
-  guard = new Guard(map, 10, 10);
+  LinkedList<Coordinates> path1 = new LinkedList<>();
+  path1.add(new Coordinates(20, 1));
+  path1.add(new Coordinates(20, 18));
+  path1.add(new Coordinates(6, 25));
+  path1.add(new Coordinates(4, 15));
+  path1.add(new Coordinates(5, 1));
+  guard = new Guard(map, 5, 1, path1);
   drawables.add(guard);
 
   

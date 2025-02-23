@@ -17,7 +17,7 @@ class Guard extends GameElement{
   private Coordinates coords;
   private Coordinates goalCoords;
   
-  private int speed = 1;
+  private int speed = 3;
   private double guardAngle = 0.0;
   private int vision; 
   private double lightAngle = 45.0; //number of degrees from the direction the guard is looking (mirrored across the center, so the total angle is doubled
@@ -35,6 +35,8 @@ class Guard extends GameElement{
     coords = new Coordinates(row, col);
     screenCoords = map.GetTilePos(coords.getRow(), coords.getCol());
     dir = Direction.Bottom;
+    setGoal(map.GetTilePos(patrol.peek().getRow(), patrol.peek().getCol()));
+    patrolSpots = patrol;
     
     upWalk = new Animation("upWalk.png", 2, 16, 32, 10, true);
     downIdle = new Animation("downIdle.png", 1, 16, 32, 10, true);
@@ -145,6 +147,9 @@ class Guard extends GameElement{
       }
       if(goal) break;
     }
+      System.out.println("goal index collidability: " + map.getGrid()
+      [map.GetTile(new Coordinates(goalCoords.getRow(), goalCoords.getCol())).getRow()]
+      [map.GetTile(new Coordinates(goalCoords.getRow(), goalCoords.getCol())).getCol()]);
     HashMap<Coordinates, Coordinates> path = new HashMap<>();
     while(!current.equals(this.coords)){
       path.put(seen.get(current), current);
@@ -201,6 +206,7 @@ class Guard extends GameElement{
   public void cycleSpots(){
     patrolSpots.add(patrolSpots.remove(0));
     setGoal(map.GetTilePos(patrolSpots.peek().getRow(), patrolSpots.peek().getCol()));
+    System.out.println(this.toString());
   }
   
   public Coordinates getPos(){
@@ -214,6 +220,7 @@ class Guard extends GameElement{
   }
   
   public Direction move(){
+    System.out.println(path==null);
     int x = speed * (path.get(coords).getRow() - coords.getRow()); 
     int y = speed * (path.get(coords).getCol() - coords.getCol());
     screenCoords = new Coordinates(screenCoords.getRow() + x, screenCoords.getCol() + y);
