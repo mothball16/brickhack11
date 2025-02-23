@@ -1,6 +1,5 @@
 class DrawManager {
   boolean pauseRequested;
-<<<<<<< HEAD
   HashMap<String,Button> buttons;
   ArrayList<IMouseListener> listeners;
   GameState prevState;
@@ -22,11 +21,13 @@ class DrawManager {
         background(50);
         HandleDrawables(drawables);
         break;
-
       
       case Playing:
         background(100);
+        pushMatrix();
+        translate(-Camera.GetX() + width/2 - 10, -Camera.GetY() + height/2 - 10);
         HandleDrawables(drawables);
+        popMatrix();
         break;
         
       case Paused:
@@ -80,6 +81,8 @@ class DrawManager {
         
         break;
       case Playing:
+        Camera.Update(player.GetX(), player.GetY());
+        player.Update();
         //fill, textalign, textsize, text
        if(buttons.get("exit").IsPressed()){
          nextState = GameState.Paused;
@@ -98,7 +101,6 @@ class DrawManager {
      
     }
     
-    print("yo");
     if(prevState != nextState){
       EnterState(nextState);
     }

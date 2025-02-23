@@ -1,4 +1,4 @@
 public interface IInputListener {
-  void OnKeyPressed(char input); 
-  void OnKeyReleased(char input);
+  void OnKeyAction(char input,boolean down); 
+
 }

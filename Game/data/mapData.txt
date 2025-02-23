@@ -1,0 +1,12 @@
+11,9
+e, d, d, d, d, d, d, d, e,
+e, e, e, e, e, e, e, e, e,
+e, d, e, d, e, d, d, e, e,
+e, e, e, e, e, e, e, e, e,
+d, e, d, d, e, d, e, d, e,
+d, e, e, e, e, d, e, e, e,
+d, e, e, e, e, d, e, e, e,
+d, e, d, d, e, d, e, d, e,
+e, e, e, e, e, e, e, e, e,
+e, d, e, d, e, d, d, e, e,
+e, e, e, e, e, e, e, e, e,

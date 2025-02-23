@@ -34,6 +34,16 @@ class Map extends GameElement {
     (int) ((col + 0.5) * tileBuffer));
   }
   
+  public Coordinates GetTile(Coordinates c){
+    return new Coordinates(
+    (int) c.getRow()/tileBuffer, 
+    (int) c.getCol()/tileBuffer);
+  }
+  
+  public boolean sameTile(Coordinates tile1, Coordinates tile2){
+    return GetTile(tile1).equals(GetTile(tile2)); 
+  }
+  
   public int GetWidth(){
     return grid[0].length; 
   }

@@ -33,20 +33,23 @@ public class Button implements IDrawable, IMouseListener {
     this.img.resize(w, h);
   }
   
-  public void OnMousePressed(){
-    if(CheckOverlap(mouseX,mouseY)){
-      isPressed = true;
-      //if(onMousePressed != null) onMousePressed.run(); 
+  public void OnMouseAction(boolean pressed){
+    if(pressed){
+      if(CheckOverlap(mouseX,mouseY)){
+        isPressed = true;
+        //if(onMousePressed != null) onMousePressed.run(); 
+      }  
+    } else {
+      if(isPressed){
+        isPressed = false;
+      //  if(onMouseReleased != null) onMouseReleased.run(); 
+      }      
+      
     }
+    
+
   }
-  
-  public void OnMouseReleased(){
-    if(isPressed){
-      isPressed = false;
-    //  if(onMouseReleased != null) onMouseReleased.run(); 
-    }
-  }
-  
+ 
   
   
 }
