@@ -83,7 +83,7 @@ class DrawManager {
         break;
       case Playing:
         Camera.Update(player.GetX(), player.GetY());
-        player.Update();
+        player.Update(map);
         //fill, textalign, textsize, text
        if(buttons.get("exit").IsPressed()){
          nextState = GameState.Paused;

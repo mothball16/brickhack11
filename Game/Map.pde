@@ -3,8 +3,28 @@ class Map extends GameElement {
   private final int[][] heightMap;
   private int tileBuffer;
   
-  public Map(TileFactory tileFactory, int tileBuffer, String[][] mapData){
+  
+  //file loaider
+  public String[][] LoadFile(String filePath){
+     String[] lines = loadStrings(filePath);
+     String[][] tileMap = new String[Integer.parseInt(lines[0].split(",")[0])][Integer.parseInt(lines[0].split(",")[1])];
+     
+     for(int i = 1; i < lines.length; i++){
+       String[] data = lines[i].replaceAll("\\s+","").split(";");
+       tileMap[i-1] = data;
+     }
+     return tileMap;
+  }
+
+  public int[][] LoadHeightMap(String filePath)
+  {
+      return new int[1][1];
+  }
+  
+  public Map(TileFactory tileFactory, int tileBuffer, String filePath, String heightMapPath){
     super(1);
+    String[][] mapData = LoadFile(filePath);
+    heightMap = LoadHeightMap(heightMapPath);
     this.tileBuffer = tileBuffer;
     grid = new Tile[mapData.length][mapData[0].length];
     for(int row = 0; row < mapData.length; row++){
@@ -23,7 +43,7 @@ class Map extends GameElement {
   public void Display(){
     for(int row = 0; row < grid.length; row++){
       for(int col = 0; col < grid[row].length; col++){
-        grid[row][col].DisplayAt(col * tileBuffer, row * tileBuffer,tileBuffer);
+        grid[row][col].DisplayAt(col * tileBuffer, row * tileBuffer,tileBuffer,1);
       }
     }
   } 

@@ -20,7 +20,7 @@ public class Tile implements Cloneable {
     img.resize(32,32);
   }
 
-  public void DisplayAt(int x, int y, int buffer){
+  public void DisplayAt(int x, int y, int buffer, int heightDiff){
       if(img == null){
         rect(x,y,buffer,buffer);
         return;
@@ -28,6 +28,10 @@ public class Tile implements Cloneable {
       image(img, x, y);
       textSize(20);
       text(id,x,y);
+      
+      fill(0,0,0,1-heightDiff/2);
+      rect(x,y, buffer,buffer);
+      
   }
 
   public boolean GetOpaque(){ 
