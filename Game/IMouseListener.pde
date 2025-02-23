@@ -1,5 +1,4 @@
 interface IMouseListener {
-  public void OnMousePressed();
-  public void OnMouseReleased();
+  public void OnMouseAction(boolean pressed);
   
 }
