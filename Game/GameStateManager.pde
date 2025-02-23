@@ -105,5 +105,11 @@ class DrawManager {
     
     prevState = state;
     return nextState;
-  } 
+  }
+  
+  public drawPlayerOverlay() {
+    
+    
+  }
+  
 }

@@ -19,13 +19,13 @@ abstract class Collectibles extends GameElement {
   
   void removeItem() {
     if (currentlyAdded) {
-      points -= itemsPoints[indexPoint];
+      points -= itemPoints[indexPoint];
     }
   }
   
   void reAddItem() {
     if (!currentlyAdded) {
-      points += itemsPoints[indexPoint];
+      points += itemPoints[indexPoint];
     }
   }
 
