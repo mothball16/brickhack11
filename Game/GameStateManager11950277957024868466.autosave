@@ -61,7 +61,6 @@ class DrawManager {
         case Playing:
           buttons.put("exit", new Button(listeners, "pause_default.png",width-60,20,40,40,1));
 
-            map.AddCollectible("cheeseburger", 1, 1);
           
           break;
         
@@ -91,14 +90,13 @@ class DrawManager {
         Camera.Update(player.GetX(), player.GetY());
         player.Update(map);
         guardManager.moveAllGuards(new Coordinates((int)player.GetX(), (int)player.GetY()));
-        timer--;
+        guard.Update();
+        
+        
+        
         //fill, textalign, textsize, text
        if(buttons.get("exit").IsPressed()){
          nextState = GameState.Paused;
-       }
-       //System.out.println("\n"+timer);
-       if(timer == 0){
-         nextState = GameState.GameOver;
        }
         
         break;

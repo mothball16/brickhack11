@@ -6,6 +6,7 @@
 public class Tile implements Cloneable {  
   PImage img;
   boolean collidable, opaque;
+  ArrayList<Collectible> drops;
   int id;
   
   public Tile(String img, boolean collidable, boolean opaque){
@@ -17,6 +18,7 @@ public class Tile implements Cloneable {
     this.opaque = opaque;
     this.img = img;
     this.id = id;
+    drops = new ArrayList<Collectible>();
     img.resize(32,32);
   }
 
@@ -32,7 +34,14 @@ public class Tile implements Cloneable {
       noStroke();
       fill(0,0,0,heightDiff*255/3);
       rect(x,y, buffer,buffer);
-      
+      for(Collectible drop : drops){
+        drop.UpdateLocation(x,y);
+        drop.Display();
+      }
+  }
+  
+  public void AddDrop(Collectible c){
+      drops.add(c);
   }
 
   public boolean GetOpaque(){ 
