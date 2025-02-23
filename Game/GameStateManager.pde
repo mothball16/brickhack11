@@ -1,7 +1,5 @@
 class GameStateManager implements IInputListener, IMouseListener {
   boolean pauseRequested;
-  int timer = 100; // initialize with how long game lasts (temp val = 100
-  int points = 0;
   void display(GameState state) {
     timer--;
     if (timer == 0) {
