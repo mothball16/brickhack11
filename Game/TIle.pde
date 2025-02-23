@@ -20,16 +20,17 @@ public class Tile implements Cloneable {
     img.resize(32,32);
   }
 
-  public void DisplayAt(int x, int y, int buffer, int heightDiff){
+  public void DisplayAt(int x, int y, int buffer, float heightDiff){
       if(img == null){
         rect(x,y,buffer,buffer);
         return;
       }
       image(img, x, y);
       textSize(20);
-      text(id,x,y);
+      text(Math.round(heightDiff),x,y);
       
-      fill(0,0,0,1-heightDiff/2);
+      noStroke();
+      fill(0,0,0,heightDiff*255/3);
       rect(x,y, buffer,buffer);
       
   }

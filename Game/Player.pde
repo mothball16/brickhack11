@@ -78,11 +78,16 @@ public class Player extends GameElement implements IInputListener {
      ny /= mult;
      
      Coordinates xTile = map.GetTile(new Coordinates((int) y, (int) (x + nx * speed)));
-     if(!map.getGrid()[xTile.getRow()][xTile.getCol()].GetCollidable()){
+     if(!map.getGrid()[xTile.getRow()][xTile.getCol()].GetCollidable() 
+     && map.GetHeightDiff(xTile.getRow(),xTile.getCol()) < 0.9
+     
+     ){
        x += nx * speed;
      }
      Coordinates yTile = map.GetTile(new Coordinates((int) (y + ny * speed), (int) x));
-     if(!map.getGrid()[yTile.getRow()][yTile.getCol()].GetCollidable()){
+     if(!map.getGrid()[yTile.getRow()][yTile.getCol()].GetCollidable()
+     && map.GetHeightDiff(yTile.getRow(),yTile.getCol()) < 0.9
+     ){
        y += ny * speed;
      }
      
