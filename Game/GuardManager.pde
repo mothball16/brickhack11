@@ -13,6 +13,7 @@ class GuardManager{
   
   public void addGuard(Guard guard){
     guards.add(guard);
+    
   }
   
   public boolean removeGuard(Guard guard){

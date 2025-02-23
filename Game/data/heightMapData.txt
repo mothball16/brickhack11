@@ -14,19 +14,14 @@
 //second floor right ramp 1-2
 13,10,2,7,1.5
 //first floor
-0,16,28,6,1
-29,19,3,3,1
-31,17,1,2,1
-//right side middle bottom
-18,12,14,5,1.5
-29,17,2,1,1.5
+0,17,17,6,1
+18,18,15,5,1
+//right side floor
+18,9,13,9,2
 //right side middle bottom to upper ramp
 21,14,2,2,1.75
-//right side middle upper
-17,8,14,5,2
-19,13,11,1,2
 //right side middle upper to upper ramp
 22,8,2,2,2.5
 //all the way right ramp *
-30,13,2,4,1.25
+30,13,2,5,1.25
 30,9,2,4,1.75
