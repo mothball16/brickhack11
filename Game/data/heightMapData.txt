@@ -14,8 +14,8 @@
 //second floor right ramp 1-2
 13,10,2,7,1.5
 //first floor
-0,17,17,6,1
-18,18,15,5,1
+0,17,17,5,1
+18,18,14,4,1
 //right side floor
 18,9,13,9,2
 //right side middle bottom to upper ramp
