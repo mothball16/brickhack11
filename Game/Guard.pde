@@ -189,7 +189,7 @@ class Guard extends GameElement{
     }
   }
   
-  public double distanceFormula(int row, int col){
+  public double distanceFormula(double row, double col){
     double distRows = row - screenCoords.getRow();
     double distCols = col - screenCoords.getCol();
     return Math.sqrt(distRows*distRows + distCols*distCols);
