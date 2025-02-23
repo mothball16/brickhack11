@@ -44,6 +44,10 @@ class Map extends GameElement {
     return GetTile(tile1).equals(GetTile(tile2)); 
   }
   
+  public int getTileBuffer(){
+    return tileBuffer;
+  }
+  
   public int GetWidth(){
     return grid[0].length; 
   }

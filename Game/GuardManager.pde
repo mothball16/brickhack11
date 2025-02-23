@@ -19,7 +19,7 @@ class GuardManager{
     return guards.remove(guard);
   }
   
-  public void moveAllGuards(){
+  public void moveAllGuards(Coordinates player){
     for(Guard guard : guards){
       guard.move();
     }
